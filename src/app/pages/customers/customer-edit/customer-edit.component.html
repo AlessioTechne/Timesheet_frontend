@@ -1,0 +1,40 @@
+<mat-card class="trinta-card mb-25 bg-white border-none d-block">
+  <mat-card-header>
+    <mat-card-title>
+      <h5 class="mt-0 mb-0">
+        {{pageTitle}}
+      </h5>
+    </mat-card-title>
+    <mat-card-subtitle>
+      <button matTooltip='Elimina utente' mat-mini-fab color="warn" style="display: inline; margin-right:20px; "
+        (click)="onDelete()" *ngIf="customerId>0">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="customerForm" class="form-container">
+      <div class="row">
+        <app-text-input [formControl]="$any(customerForm.controls['initials'])" [label]="'Sigla'" [icon]="'user'"></app-text-input>
+        <app-text-input [formControl]="$any(customerForm.controls['customerName'])" [label]="'Nome Cliente'"
+          [icon]="'user'"></app-text-input>
+        <app-text-input [formControl]="$any(customerForm.controls['vatId'])" [label]="'P. Iva'"
+          [icon]="'user'"></app-text-input>
+        <br>
+        <button mat-fab extended color="primary" (click)="onSubmit()" [disabled]="customerForm.invalid">
+          <mat-icon>save</mat-icon> Salva
+        </button>
+        <button mat-fab extended color="accent" (click)="onCancel()">
+          <mat-icon>cancel</mat-icon> Annulla
+        </button>
+        <div class="label-group">
+         
+          <label>Creato da {{customer.createdBy}} il {{customer.createdAt | date: 'dd/MM/yyyy HH:mm'}}</label>
+
+          <label>Modificato da {{customer.modifiedBy}} il {{customer.modifiedAt | date: 'dd/MM/yyyy HH:mm'}}</label>
+
+        </div>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

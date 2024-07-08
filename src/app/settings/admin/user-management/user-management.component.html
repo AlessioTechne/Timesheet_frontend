@@ -1,0 +1,49 @@
+<mat-card class="trinta-card mb-25 bg-white border-none d-block">
+  <mat-card-header>
+    <mat-card-title>
+      <h5 class="mt-0 mb-0">
+        Utenti
+      </h5>
+    </mat-card-title>
+    <mat-card-subtitle>
+      <button matTooltip='Inserisci nuovo Utente' mat-mini-fab color="primary"
+        style="display: right; margin-right:20px; " [routerLink]="['/settings/user-edit']">
+        <mat-icon>add</mat-icon>
+      </button>
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="table-responsive">
+      <table class="main-table" mat-table [dataSource]="dataSource">
+        <!-- FullName Column -->
+        <ng-container matColumnDef="fullName">
+          <th mat-header-cell *matHeaderCellDef> Nominativo </th>
+          <td mat-cell *matCellDef="let element"> {{element.fullName}} </td>
+        </ng-container>
+        <!-- Roles Column -->
+        <ng-container matColumnDef="roles">
+          <th mat-header-cell *matHeaderCellDef> Ruolo </th>
+          <td mat-cell *matCellDef="let element">
+            <ng-container *ngFor="let role of element.roles; let i = index">
+              {{role}}{{i < element.roles.length - 1 ? ', ' : '' }} </ng-container>
+          </td>
+        </ng-container>
+        <!-- Edit Column -->
+        <ng-container matColumnDef="edit">
+          <th mat-header-cell *matHeaderCellDef> Modifica
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button matTooltip="Primary" color="basic" aria-label="Modifica Utente"
+              [routerLink]="['/settings/user-edit', element.userId ]">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+        <!-- Header Row -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <!-- Data Row -->
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+  </mat-card-content>
+</mat-card>

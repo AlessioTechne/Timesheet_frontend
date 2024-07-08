@@ -1,0 +1,92 @@
+<mat-card class="trinta-card products-list-card mb-25 bg-white border-none d-block">
+    <mat-card-header>
+        <mat-card-title>
+            <h5 class="mt-0 mb-0">
+                Clienti
+            </h5>
+        </mat-card-title>
+        <mat-card-subtitle>
+            <button matTooltip='Inserisci nuovo Customer' mat-mini-fab color="primary"
+                style="display: right; margin-right:20px; " [routerLink]="['/customer/edit']">
+                <mat-icon>add</mat-icon>
+            </button>
+        </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+
+        <form class="search-box position-relative">
+            <div class="flex-container">
+                <mat-form-field class="search">
+                    <i-feather name="search"></i-feather>
+                    <mat-label>Codice</mat-label>
+                    <input matInput (keyup)="applyFilter($event)" name="initials">
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Nome Cliente</mat-label>
+                    <i-feather name="search"></i-feather>
+                    <input matInput (keyup)="applyFilter($event)" name="customerName">
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>P. Iva</mat-label>
+                    <i-feather name="search"></i-feather>
+                    <input matInput (keyup)="applyFilter($event)" name="vatId">
+                </mat-form-field>
+            </div>
+        </form>
+
+        <div class="table-responsive">
+            <table mat-table [dataSource]="dataSource">
+                <!-- Codice Column -->
+                <ng-container matColumnDef="initials">
+                    <th mat-header-cell *matHeaderCellDef>
+                        Initials
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                        {{element.initials}}
+                    </td>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="customerName">
+                    <th mat-header-cell *matHeaderCellDef>
+                        Nome Cliente
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                        {{element.customerName}}
+                    </td>
+                </ng-container>
+
+                <!-- Piva Column -->
+                <ng-container matColumnDef="vatId">
+                    <th mat-header-cell *matHeaderCellDef>
+                        P. Iva
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                        {{element.vatId}}
+                    </td>
+                </ng-container>
+
+                <!-- Action Column -->
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef> Modifica
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                        <button mat-icon-button matTooltip="Primary" color="basic" aria-label="Modifica Cliente"
+                            [routerLink]="['/customer/edit', element.customerId ]">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            </table>
+        </div>
+        <mat-divider></mat-divider>
+        <mat-paginator [length]="pagination?.totalItems" [pageSize]="pagination?.itemsPerPage"
+            [pageSizeOptions]="[5, 10, 25, 50]" (page)="pageChanged($event)" [pageIndex]="pagination?.currentPage"
+            [hidePageSize]="false" showFirstLastButtons>
+        </mat-paginator>
+    </mat-card-content>
+</mat-card>

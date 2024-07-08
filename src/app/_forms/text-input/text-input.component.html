@@ -1,0 +1,21 @@
+<div class="col-sm-4">
+    <mat-form-field>
+        <i-feather name="{{icon}}"></i-feather>
+        <mat-label>{{ label }}</mat-label>
+        <input matInput [formControl]="control" [readonly]="readonly">
+    </mat-form-field>
+    <div class="error text-danger" *ngIf="control.errors?.['required']"> Perfavore inserisci
+        {{label}} </div>
+
+    <div class="error text-danger" *ngIf="control.errors?.['minlength']"> {{label}} deve essere almeno
+        {{control.errors?.['minlength'].requiredLength}} caratteri </div>
+
+    <div class="error text-danger" *ngIf="control.errors?.['maxlength']"> {{label}} deve essere al massimo
+        {{control.errors?.['maxlength'].requiredLength}} caratteri</div>
+
+    <div class="error text-danger" *ngIf="control.errors?.['notMatching']">Le password non corrispondono</div>
+
+    <div class="error text-danger" *ngIf="control.errors?.['email']"> Perfavore inserisci un email valida ex.
+        prova&#64;mail.it</div>
+
+</div>
