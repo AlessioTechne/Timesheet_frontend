@@ -1,7 +1,7 @@
-import { BehaviorSubject, map, retry } from 'rxjs';
-import { Injectable, model } from '@angular/core';
+import { BehaviorSubject, map, take } from 'rxjs';
 
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { User } from '../_models/user';
 import { environment } from '../environments/environments';
 
@@ -12,11 +12,13 @@ export class AuthService {
   baseUrl: string = environment.authenticateUrl;
   private currentUserSource = new BehaviorSubject<User | null>(null);
   currentUser$ = this.currentUserSource.asObservable();
+  token: string;
 
   constructor(private http: HttpClient) {}
 
-  login() {
-    return this.http.post<User>(this.baseUrl + 'account/login', model).pipe(
+  login(model: any) {
+    const formValues = model.value;
+    return this.http.post<User>(this.baseUrl + 'Login', formValues).pipe(
       map((response: User) => {
         const user = response;
         if (user) {
@@ -28,11 +30,13 @@ export class AuthService {
 
   setCurrentUser(user: User) {
     user.roles = [];
+    this.token = user.token;
+    console.log(this.token)
     const roles = this.getDecodedToken(user.token).role;
     Array.isArray(roles) ? (user.roles = roles) : user.roles.push(roles);
     localStorage.setItem('user', JSON.stringify(user));
+    console.log(localStorage);
     this.currentUserSource.next(user);
-    console.log(this.currentUser$);
   }
 
   logout() {
@@ -42,5 +46,8 @@ export class AuthService {
 
   getDecodedToken(token: string) {
     return JSON.parse(atob(token.split('.')[1]));
+  }
+  getAuthToken() {
+    return this.token;
   }
 }

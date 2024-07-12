@@ -9,7 +9,6 @@ import {
 } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { FeatherModule } from 'angular-feather';
 import { BasicFormComponent } from '../../forms/basic-elements/basic-form/basic-form.component';
 import { MatCardModule } from '@angular/material/card';
 import { FeathericonsModule } from '../../icons/feathericons/feathericons.module';
@@ -34,8 +33,6 @@ import { RouterLink } from '@angular/router';
 })
 export class TextInputComponent implements ControlValueAccessor {
   @Input() label = '';
-  @Input() icon = '';
-  @Input() readonly = false;
 
   constructor(@Self() public ngControl: NgControl) {
     this.ngControl.valueAccessor = this;

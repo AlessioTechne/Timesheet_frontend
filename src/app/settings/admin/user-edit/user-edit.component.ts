@@ -120,7 +120,7 @@ export class UserEditComponent implements OnInit {
         };
         this.adminServices.updateUserWithRoles(userUpdateDto).subscribe({
           complete: () => {
-            this.router.navigate(['settings/admin-panel']);
+            this.router.navigate(['home/settings/admin-panel']);
             this._snackBar.open('Utente modificato con successo', 'Chiudi');
           },
           error: (e) => {
@@ -140,7 +140,7 @@ export class UserEditComponent implements OnInit {
         };
         this.adminServices.createUserWithRoles(userNewDto).subscribe({
           complete: () => {
-            this.router.navigate(['settings/admin-panel']);
+            this.router.navigate(['home/settings/admin-panel']);
             this._snackBar.open('Utente creato con successo', 'Chiudi');
           },
           error: (e) => {
@@ -162,7 +162,7 @@ export class UserEditComponent implements OnInit {
     if (confirm('Sei sicuro di voler eliminare definitivamente questo utente?'))
       this.adminServices.deleteUser(this.userId).subscribe({
         next: () => {
-          this.router.navigate(['settings/admin-panel']);
+          this.router.navigate(['home/settings/admin-panel']);
           this._snackBar.open('Utente eliminato con successo', 'Chiudi');
         },
         error: (error) => {
@@ -173,6 +173,6 @@ export class UserEditComponent implements OnInit {
   }
 
   onCancel() {
-    this.router.navigate(['settings/admin-panel']);
+    this.router.navigate(['home/settings/admin-panel']);
   }
 }

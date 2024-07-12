@@ -1,0 +1,190 @@
+<mat-card class="trinta-card mb-25 bg-white border-none d-block">
+    <mat-card-header>
+        <mat-card-title>
+            <h5 class="mt-0 mb-0">
+                TimeTable
+            </h5>
+        </mat-card-title>
+        <mat-card-subtitle>
+
+        </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <form [formGroup]="timeTableForm" class="form-container">
+            <div class="row">
+                <ng-container>
+                    <td mat-cell>
+                        Lunedì
+                    </td>
+                </ng-container>
+                <div class="col-sm-4">
+                    <mat-form-field>
+                        <i-feather name="user"></i-feather>
+                        <mat-label>Ore Minime</mat-label>
+                        <input matInput formControlName='minHours1' type="number">
+                    </mat-form-field>
+                    <app-text-input [formControl]="$any(timeTableForm.controls['minHours1'])" [label]="'Ora minima'"></app-text-input>
+
+                </div>
+                <div class="col-sm-4">
+                    <mat-form-field>
+                        <mat-label>Ore Massime</mat-label>
+                        <input matInput formControlName='maxHours1' type="number">
+                    </mat-form-field>
+                    <app-text-input [formControl]="$any(timeTableForm.controls['maxHours1'])" [label]="'Ora massima'"></app-text-input>
+
+                </div>
+            </div>
+            <div class="row">
+                <ng-container>
+                    <td mat-cell>
+                        Martedì
+                    </td>
+                </ng-container>
+                <div class="col-sm-4">
+                    <mat-form-field>
+                        <i-feather name="user"></i-feather>
+                        <mat-label>Ore Minime</mat-label>
+                        <input matInput formControlName='minHours2' type="number">
+                    </mat-form-field>
+                    <app-text-input [formControl]="$any(timeTableForm.controls['minHours2'])" [label]="'Ora minima'"></app-text-input>
+
+                </div>
+                <div class="col-sm-4">
+                    <mat-form-field>
+                        <mat-label>Ore Massime</mat-label>
+                        <input matInput formControlName='maxHours2' type="number">
+                    </mat-form-field>
+                    <app-text-input [formControl]="$any(timeTableForm.controls['maxHours2'])" [label]="'Ora massima'"></app-text-input>
+
+                </div>
+            </div>
+            <div class="row">
+                <ng-container>
+                    <td mat-cell>
+                        Mercoledì
+                    </td>
+                </ng-container>
+                <div class="col-sm-4">
+                    <mat-form-field>
+                        <i-feather name="user"></i-feather>
+                        <mat-label>Ore Minime</mat-label>
+                        <input matInput formControlName='minHours3' type="number">
+                    </mat-form-field>
+                    <app-text-input [formControl]="$any(timeTableForm.controls['minHours3'])" [label]="'Ora minima'"></app-text-input>
+
+                </div>
+                <div class="col-sm-4">
+                    <mat-form-field>
+                        <mat-label>Ore Massime</mat-label>
+                        <input matInput formControlName='maxHours3' type="number">
+                    </mat-form-field>
+                    <app-text-input [formControl]="$any(timeTableForm.controls['maxHours3'])" [label]="'Ora massima'"></app-text-input>
+
+                </div>
+            </div>
+            <div class="row">
+                <ng-container>
+                    <td mat-cell>
+                        Giovedì
+                    </td>
+                </ng-container>
+                <div class="col-sm-4">
+                    <mat-form-field>
+                        <i-feather name="user"></i-feather>
+                        <mat-label>Ore Minime</mat-label>
+                        <input matInput formControlName='minHours4' type="number">
+                    </mat-form-field>
+                    <app-text-input [formControl]="$any(timeTableForm.controls['minHours4'])" [label]="'Ora minima'"></app-text-input>
+
+                </div>
+                <div class="col-sm-4">
+                    <mat-form-field>
+                        <mat-label>Ore Massime</mat-label>
+                        <input matInput formControlName='maxHours4' type="number">
+                    </mat-form-field>
+                    <app-text-input [formControl]="$any(timeTableForm.controls['maxHours4'])" [label]="'Ora massima'"></app-text-input>
+
+                </div>
+            </div>
+            <div class="row">
+                <ng-container>
+                    <td mat-cell>
+                        Venerdì
+                    </td>
+                </ng-container>
+                <div class="col-sm-4">
+                    <mat-form-field>
+                        <i-feather name="user"></i-feather>
+                        <mat-label>Ore Minime</mat-label>
+                        <input matInput formControlName='minHours5' type="number">
+                    </mat-form-field>
+                    <app-text-input [formControl]="$any(timeTableForm.controls['minHours5'])" [label]="'Ora minima'"></app-text-input>
+
+                </div>
+                <div class="col-sm-4">
+                    <mat-form-field>
+                        <mat-label>Ore Massime</mat-label>
+                        <input matInput formControlName='maxHours5' type="number">
+                    </mat-form-field>
+                    <app-text-input [formControl]="$any(timeTableForm.controls['maxHours5'])" [label]="'Ora massima'"></app-text-input>
+
+                </div>
+            </div>
+            <div class="row">
+                <ng-container>
+                    <td mat-cell>
+                        Sabato
+                    </td>
+                </ng-container>
+                <div class="col-sm-4">
+                    <mat-form-field>
+                        <i-feather name="user"></i-feather>
+                        <mat-label>Ore Minime</mat-label>
+                        <input matInput formControlName='minHours6' type="number">
+                    </mat-form-field>
+                    <app-text-input [formControl]="$any(timeTableForm.controls['minHours6'])" [label]="'Ora minima'"></app-text-input>
+
+                </div>
+                <div class="col-sm-4">
+                    <mat-form-field>
+                        <mat-label>Ore Massime</mat-label>
+                        <input matInput formControlName='maxHours6' type="number">
+                    </mat-form-field>
+                    <app-text-input [formControl]="$any(timeTableForm.controls['maxHours6'])" [label]="'Ora massima'"></app-text-input>
+
+                </div>
+            </div>
+            <div class="row">
+                <ng-container>
+                    <td mat-cell>
+                        Domenica
+                    </td>
+                </ng-container>
+                <div class="col-sm-4">
+                    <mat-form-field>
+                        <i-feather name="user"></i-feather>
+                        <mat-label>Ore Minime</mat-label>
+                        <input matInput formControlName='minHours7' type="number">
+                    </mat-form-field>
+                    <app-text-input [formControl]="$any(timeTableForm.controls['minHours7'])" [label]="'Ora minima'"></app-text-input>
+
+                </div>
+                <div class="col-sm-4">
+                    <mat-form-field>
+                        <mat-label>Ore Massime</mat-label>
+                        <input matInput formControlName='maxHours7' type="number">
+                    </mat-form-field>
+                    <app-text-input [formControl]="$any(timeTableForm.controls['maxHours7'])" [label]="'Ora massima'"></app-text-input>
+
+                </div>
+            </div>
+            <button mat-fab extended color="primary" (click)="onSubmit()" [disabled]="(timeTableForm.invalid || !timeTableForm.dirty)">
+                <mat-icon>save</mat-icon> Salva
+            </button>
+            <button mat-fab extended color="accent" (click)="onCancel()">
+                <mat-icon>cancel</mat-icon> Annulla
+            </button>
+        </form>
+    </mat-card-content>
+</mat-card>

@@ -23,10 +23,11 @@ export interface CustomerNewDto {
 }
 
 export class CustomerParams {
-  customerName ='';
-  initials='';
-  vatId='';
+  customerName = '';
+  initials = '';
+  vatId = '';
   pageNumber = 0;
   pageSize = 10;
   orderBy = 'name';
+  orderDirection = '';
 }

@@ -103,7 +103,6 @@ export class CustomerEditComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.customerForm.valid);
     this.formSubmitted = true;
     if (this.customerForm.valid) {
       if (this.customerId) {
@@ -115,7 +114,7 @@ export class CustomerEditComponent implements OnInit {
         };
         this.customerService.editCustomer(userUpdateDto).subscribe({
           complete: () => {
-            this.router.navigate(['customer']);
+            this.router.navigate(['home/customer']);
             this._snackBar.open('Cliente modificato con successo', 'Chiudi');
           },
           error: (e) => {
@@ -131,7 +130,7 @@ export class CustomerEditComponent implements OnInit {
         };
         this.customerService.createCustomer(customerNewDto).subscribe({
           complete: () => {
-            this.router.navigate(['customer']);
+            this.router.navigate(['home/customer']);
             this._snackBar.open('Cliente creato con successo');
           },
           error: (e) => {
@@ -152,7 +151,7 @@ export class CustomerEditComponent implements OnInit {
     ) {
       this.customerService.deleteCustomer(this.customerId).subscribe({
         next: () => {
-          this.router.navigate(['customer']);
+          this.router.navigate(['home/customer']);
           this._snackBar.open('Cliente eliminato con successo', 'Chiudi');
         },
         error: (error) => {
@@ -164,6 +163,6 @@ export class CustomerEditComponent implements OnInit {
   }
 
   onCancel() {
-    this.router.navigate(['customer']);
+    this.router.navigate(['home/customer']);
   }
 }

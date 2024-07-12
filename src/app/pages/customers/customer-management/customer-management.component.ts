@@ -1,7 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CustomerDto, CustomerParams } from '../../../_models/customer';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 
 import { CommonModule } from '@angular/common';
@@ -33,6 +39,7 @@ import { RouterLink } from '@angular/router';
     MatFormFieldModule,
     FeathericonsModule,
     MatInputModule,
+    MatSortModule,
   ],
   templateUrl: './customer-management.component.html',
   styleUrl: './customer-management.component.scss',
@@ -42,14 +49,49 @@ export class CustomerManagementComponent implements OnInit {
   pagination: Pagination | undefined;
   customerParams: CustomerParams | undefined;
   dataSource: MatTableDataSource<CustomerDto, MatPaginator>;
+  @ViewChild(MatSort) sort: MatSort;
+  filtersForm: FormGroup;
 
   displayedColumns = ['initials', 'customerName', 'vatId', 'action'];
 
-  constructor(private customerServices: CustomersService) {
+  constructor(
+    private customerServices: CustomersService,
+    private fb: FormBuilder
+  ) {
     this.customerParams = customerServices.getCustomerParams();
   }
   ngOnInit(): void {
     this.loadCustomer();
+    this.initializeFilterForms();
+    this.filtersForm.valueChanges.subscribe((values) => {
+      if (this.customerParams) {
+        this.customerParams.initials =
+          values.initials === null ? '' : values.initials;
+        this.customerParams.vatId = values.vatId === null ? '' : values.vatId;
+        this.customerParams.customerName =
+          values.customerName === null ? '' : values.customerName;
+
+        this.customerServices.setCustomerParams(this.customerParams);
+        this.loadCustomer();
+      }
+    });
+    if (this.sort) {
+      this.sort.sortChange.subscribe((sort: Sort) => {
+        if (this.customerParams) {
+          this.customerParams.orderBy = sort.active;
+          this.customerParams.orderDirection = sort.direction;
+          this.loadCustomer();
+        }
+      });
+    }
+  }
+
+  initializeFilterForms() {
+    this.filtersForm = this.fb.group({
+      initials: [this.customerParams?.initials],
+      customerName: [this.customerParams?.customerName],
+      vatId: [this.customerParams?.vatId],
+    });
   }
 
   loadCustomer() {
@@ -69,8 +111,7 @@ export class CustomerManagementComponent implements OnInit {
   }
 
   resetFilters() {
-    this.customerParams = this.customerServices.resetUserParams();
-    this.loadCustomer();
+    this.filtersForm.reset();
   }
 
   pageChanged(event: any) {
@@ -80,35 +121,5 @@ export class CustomerManagementComponent implements OnInit {
       this.customerServices.setCustomerParams(this.customerParams);
       this.loadCustomer();
     }
-  }
-
-  applyFilter(event: any) {
-    
-    const filterValue = event.target as HTMLInputElement;
-
-    console.log(filterValue.name)
-
-    if (this.customerParams) {
-      switch (filterValue.name) {
-        case 'initials':
-          console.log(filterValue.value);
-          this.customerParams.initials = filterValue.value;
-          break;
-
-        case 'vatId':
-          this.customerParams.vatId = filterValue.value;
-          break;
-
-        case 'customerName':
-          this.customerParams.customerName = filterValue.value;
-          break;
-
-        default:
-          break;
-      }
-      this.customerParams.pageNumber = 0;
-      this.customerServices.setCustomerParams(this.customerParams);
-    }
-    this.loadCustomer();
   }
 }

@@ -15,12 +15,31 @@
   <mat-card-content>
     <form [formGroup]="userForm">
       <div class="row">
-        <app-text-input [formControl]="$any(userForm.controls['fullName'])" [label]="'Nominativo'"
-          [icon]="'user'"></app-text-input>
-        <app-text-input [formControl]="$any(userForm.controls['userName'])" [label]="'Username'" [icon]="'user'"
-          [readonly]="!!userId"></app-text-input>
-        <app-text-input [formControl]="$any(userForm.controls['email'])" [label]="'Email'"
-          [icon]="'mail'"></app-text-input>
+        <div class="col-sm-6">
+          <mat-form-field>
+            <i-feather name="user"></i-feather>
+            <mat-label>Nominativo</mat-label>
+            <input matInput [formControl]="$any(userForm.controls['fullName'])">
+          </mat-form-field>
+          <app-text-input [formControl]="$any(userForm.controls['fullName'])" [label]="'Nominativo'" />
+        </div>
+        <div class="col-sm-6">
+          <mat-form-field>
+            <i-feather name="user"></i-feather>
+            <mat-label>Username</mat-label>
+            <input matInput [formControl]="$any(userForm.controls['userName'])" [readonly]="!!userId">
+          </mat-form-field>
+
+          <app-text-input [formControl]="$any(userForm.controls['userName'])" [label]="'Username'" />
+        </div>
+        <div class="col-sm-6">
+          <mat-form-field>
+            <i-feather name="mail"></i-feather>
+            <mat-label>Email</mat-label>
+            <input matInput [formControl]="$any(userForm.controls['email'])">
+          </mat-form-field>
+          <app-text-input [formControl]="$any(userForm.controls['email'])" [label]="'Email'" />
+        </div>
 
         <div class="col-md-6 col-xxl-4">
           <mat-form-field>
@@ -29,13 +48,14 @@
             <mat-select multiple formControlName="roles">
               <mat-option *ngFor="let role of roles" [value]="role.name">{{ role.name }}</mat-option>
             </mat-select>
-          </mat-form-field>
-        </div>
-        <div class="error text-danger"
-          *ngIf="userForm.get('roles')!.hasError('required') && userForm.get('roles')!.touched">
-          Perfavore seleziona almeno un ruolo
+          </mat-form-field><div class="error text-danger"
+        *ngIf="userForm.get('roles')!.hasError('required') && userForm.get('roles')!.touched">
+        Perfavore seleziona almeno un ruolo
+      </div>
+
         </div>
       </div>
+      
 
       <button mat-fab extended color="primary" (click)="onSubmit()" [disabled]="userForm.invalid">
         <mat-icon>save</mat-icon> Salva

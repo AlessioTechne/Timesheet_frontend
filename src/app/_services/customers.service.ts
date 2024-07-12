@@ -32,6 +32,7 @@ export class CustomersService {
     params = params.append('initials', customerParams.initials);
     params = params.append('vatId', customerParams.vatId);
     params = params.append('customerName', customerParams.customerName);
+    params = params.append('orderDirection', customerParams.orderDirection);
 
     return getPaginatedResult<CustomerDto[]>(
       this.baseUrl,
@@ -44,7 +45,7 @@ export class CustomersService {
     );
   }
 
-  resetUserParams() {
+  resetCustomerParams() {
     this.customerParams = new CustomerParams();
     return this.customerParams;
   }

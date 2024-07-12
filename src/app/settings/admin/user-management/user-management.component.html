@@ -7,7 +7,7 @@
     </mat-card-title>
     <mat-card-subtitle>
       <button matTooltip='Inserisci nuovo Utente' mat-mini-fab color="primary"
-        style="display: right; margin-right:20px; " [routerLink]="['/settings/user-edit']">
+        style="display: right; margin-right:20px; " [routerLink]="['/home/settings/user-edit']">
         <mat-icon>add</mat-icon>
       </button>
     </mat-card-subtitle>
@@ -34,7 +34,7 @@
           </th>
           <td mat-cell *matCellDef="let element">
             <button mat-icon-button matTooltip="Primary" color="basic" aria-label="Modifica Utente"
-              [routerLink]="['/settings/user-edit', element.userId ]">
+              [routerLink]="['/home/settings/user-edit', element.userId ]">
               <mat-icon>edit</mat-icon>
             </button>
           </td>
