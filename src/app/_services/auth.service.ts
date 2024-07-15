@@ -20,6 +20,7 @@ export class AuthService {
     const formValues = model.value;
     return this.http.post<User>(this.baseUrl + 'Login', formValues).pipe(
       map((response: User) => {
+        console.log(response)
         const user = response;
         if (user) {
           this.setCurrentUser(user);
@@ -31,11 +32,9 @@ export class AuthService {
   setCurrentUser(user: User) {
     user.roles = [];
     this.token = user.token;
-    console.log(this.token)
     const roles = this.getDecodedToken(user.token).role;
     Array.isArray(roles) ? (user.roles = roles) : user.roles.push(roles);
     localStorage.setItem('user', JSON.stringify(user));
-    console.log(localStorage);
     this.currentUserSource.next(user);
   }
 

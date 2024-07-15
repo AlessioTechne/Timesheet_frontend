@@ -116,7 +116,9 @@ export class EmployeesEditComponent implements OnInit {
         this.employeesService.editEmployees(userUpdateDto).subscribe({
           complete: () => {
             this.router.navigate(['home/employees']);
-            this._snackBar.open('Utente modificato con successo', 'Chiudi');
+            this._snackBar.open('Utente modificato con successo', undefined, {
+              duration: 3 * 1000,
+            });
           },
           error: (e) => {
             console.log(e);
@@ -133,7 +135,9 @@ export class EmployeesEditComponent implements OnInit {
         this.employeesService.createEmployees(customerNewDto).subscribe({
           complete: () => {
             this.router.navigate(['home/employees']);
-            this._snackBar.open('Utente creato con successo');
+            this._snackBar.open('Utente creato con successo', undefined, {
+              duration: 3 * 1000,
+            });
           },
           error: (e) => {
             console.log(e);

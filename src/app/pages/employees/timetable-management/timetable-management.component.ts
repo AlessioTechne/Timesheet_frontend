@@ -152,7 +152,7 @@ export class TimetableManagementComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.timeTableForm.controls)
+    console.log(this.timeTableForm.controls);
     if (this.timeTableForm.valid) {
       var list: EmployeeTimetablesDto[] = [];
       for (let i = 1; i < 8; i++) {
@@ -171,7 +171,9 @@ export class TimetableManagementComponent implements OnInit {
 
       this.employeesServices.updateTimetable(timeTableUpdate).subscribe({
         next: () => {
-          this._snackBar.open('Orari modificati con successo', 'Chiudi');
+          this._snackBar.open('Orari modificati con successo', undefined, {
+            duration: 3 * 1000,
+          });
           this.router.navigate(['home/employees']);
         },
         error: (e) => {

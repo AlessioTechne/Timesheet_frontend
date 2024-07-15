@@ -46,7 +46,7 @@ import { TextInputComponent } from '../../../_forms/text-input/text-input.compon
     MatDividerModule,
     TextInputComponent,
     BasicFormComponent,
-    BasicElementsComponent
+    BasicElementsComponent,
   ],
   templateUrl: './customer-edit.component.html',
   styleUrl: './customer-edit.component.scss',
@@ -88,7 +88,7 @@ export class CustomerEditComponent implements OnInit {
     if (this.customerId > 0) {
       this.customerService.getCustomer(this.customerId).subscribe({
         next: (response) => {
-          this.customer = response
+          this.customer = response;
           this.customerForm.patchValue({
             customerName: response.customerName,
             vatId: response.vatId,
@@ -115,7 +115,9 @@ export class CustomerEditComponent implements OnInit {
         this.customerService.editCustomer(userUpdateDto).subscribe({
           complete: () => {
             this.router.navigate(['home/customer']);
-            this._snackBar.open('Cliente modificato con successo', 'Chiudi');
+            this._snackBar.open('Cliente modificato con successo', undefined, {
+              duration: 3 * 1000,
+            });
           },
           error: (e) => {
             console.log(e);
@@ -131,7 +133,9 @@ export class CustomerEditComponent implements OnInit {
         this.customerService.createCustomer(customerNewDto).subscribe({
           complete: () => {
             this.router.navigate(['home/customer']);
-            this._snackBar.open('Cliente creato con successo');
+            this._snackBar.open('Cliente creato con successo', undefined, {
+              duration: 3 * 1000,
+            });
           },
           error: (e) => {
             console.log(e);
@@ -152,11 +156,15 @@ export class CustomerEditComponent implements OnInit {
       this.customerService.deleteCustomer(this.customerId).subscribe({
         next: () => {
           this.router.navigate(['home/customer']);
-          this._snackBar.open('Cliente eliminato con successo', 'Chiudi');
+          this._snackBar.open('Cliente eliminato con successo', undefined, {
+            duration: 3 * 1000,
+          });
         },
         error: (error) => {
           console.log(error);
-          this._snackBar.open('Si è verificato un errore', 'Chiudi');
+          this._snackBar.open('Si è verificato un errore', undefined, {
+            duration: 3 * 1000,
+          });
         },
       });
     }

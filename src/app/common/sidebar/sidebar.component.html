@@ -38,7 +38,30 @@
                                     Utenti
                                 </a>
                             </li>
-
+                            <li class="sidemenu-item">
+                                <a routerLink="/home/businessUnit" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+                                    class="sidemenu-link">
+                                    Business Unit
+                                </a>
+                            </li>
+                        </ul>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = true">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <i-feather name="briefcase"></i-feather>
+                                <span class="title">
+                                    Progect Management
+                                </span>
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <ul class="sidebar-sub-menu">
+                            <li class="sidemenu-item">
+                                <a routerLink="/home/project-management" routerLinkActive="active"
+                                    [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                    Project List
+                                </a>
+                            </li>
                         </ul>
                     </mat-expansion-panel>
                     <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = true">

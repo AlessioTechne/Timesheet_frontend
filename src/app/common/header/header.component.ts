@@ -1,8 +1,8 @@
 import { CommonModule, DatePipe, NgClass } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 
 import { AuthService } from '../../_services/auth.service';
-import { Component } from '@angular/core';
 import { FeathericonsModule } from '../../icons/feathericons/feathericons.module';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
@@ -55,6 +55,6 @@ export class HeaderComponent {
 
   logout() {
     this.authService.logout();
-    this.router.navigate([''])
+    this.router.navigate(['']);
   }
 }
