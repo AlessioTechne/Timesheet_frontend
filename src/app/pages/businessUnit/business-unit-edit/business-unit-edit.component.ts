@@ -68,6 +68,11 @@ export class BusinessUnitEditComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe((params) => {
+      if (params.has('businessUnitId')) {
+        this.businessUnitId = +params.get('businessUnitId')!;
+      }
+    });
     this.initializeForm();
     this.loadBusinessUnit();
   }
@@ -80,7 +85,6 @@ export class BusinessUnitEditComponent implements OnInit {
   }
 
   loadBusinessUnit() {
-    this.businessUnitId = parseInt(this.route.snapshot.url[1]?.path);
     if (this.businessUnitId > 0) {
       this.businessUnitService.getBusinessUnit(this.businessUnitId).subscribe({
         next: (response) => {

@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { CommonModule, registerLocaleData } from '@angular/common';
+import { Component, LOCALE_ID, OnInit, ViewChild } from '@angular/core';
 import { CustomerDto, CustomerParams } from '../../../_models/customer';
 import {
   FormBuilder,
@@ -10,7 +11,6 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 
-import { CommonModule } from '@angular/common';
 import { CustomersService } from '../../../_services/customers.service';
 import { FeathericonsModule } from '../../../icons/feathericons/feathericons.module';
 import { MatButtonModule } from '@angular/material/button';
@@ -21,6 +21,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { Pagination } from '../../../_models/pagination';
 import { RouterLink } from '@angular/router';
+import localeIt from '@angular/common/locales/it';
+
+registerLocaleData(localeIt, 'it');
 
 @Component({
   selector: 'app-customer-management',
@@ -41,6 +44,7 @@ import { RouterLink } from '@angular/router';
     MatInputModule,
     MatSortModule,
   ],
+  providers: [{ provide: LOCALE_ID, useValue: 'it' }],
   templateUrl: './customer-management.component.html',
   styleUrl: './customer-management.component.scss',
 })
@@ -60,9 +64,13 @@ export class CustomerManagementComponent implements OnInit {
   ) {
     this.customerParams = customerServices.getCustomerParams();
   }
+  
   ngOnInit(): void {
     this.loadCustomer();
     this.initializeFilterForms();
+  }
+
+  ngAfterViewInit() {
     this.filtersForm.valueChanges.subscribe((values) => {
       if (this.customerParams) {
         this.customerParams.initials =

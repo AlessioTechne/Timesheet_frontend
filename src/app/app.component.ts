@@ -1,7 +1,7 @@
 declare let $: any;
 import { filter } from 'rxjs/operators';
 import { isPlatformBrowser } from '@angular/common';
-import { Component, Inject, PLATFORM_ID } from '@angular/core';
+import { AfterContentChecked, ChangeDetectorRef, Component, Inject, PLATFORM_ID } from '@angular/core';
 import { HeaderComponent } from './common/header/header.component';
 import { FooterComponent } from './common/footer/footer.component';
 import { ToggleService } from '../app/common/header/toggle.service';
@@ -21,6 +21,9 @@ import {
 } from '@angular/router';
 import { AuthService } from './_services/auth.service';
 import { User } from './_models/user';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { LoadingService } from './_services/loading.service';
+import { MatCard, MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-root',
@@ -41,9 +44,11 @@ import { User } from './_models/user';
     HeaderComponent,
     FooterComponent,
     SidebarComponent,
+    MatProgressSpinnerModule,
+    MatCardModule
   ],
 })
-export class AppComponent {
+export class AppComponent implements AfterContentChecked {
   title = 'Timesheet';
   routerSubscription: any;
   location: any;
@@ -52,6 +57,8 @@ export class AppComponent {
     public router: Router,
     public toggleService: ToggleService,
     private authServices: AuthService,
+    public loadingService: LoadingService,
+    private changeDetector: ChangeDetectorRef,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {
     this.toggleService.isToggled$.subscribe((isToggled) => {
@@ -108,4 +115,8 @@ export class AppComponent {
     const user: User = JSON.parse(userString);
     this.authServices.setCurrentUser(user);
   }
+
+  ngAfterContentChecked(): void {
+    this.changeDetector.detectChanges();
+  }  
 }

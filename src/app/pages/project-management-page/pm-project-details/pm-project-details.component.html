@@ -1,0 +1,26 @@
+<!-- Stats -->
+<app-stats *ngIf="projectDto"  [project]="projectDto"/>
+
+<div class="row">
+    <div class="col-xxxl-8">
+
+        <!-- Project Overview -->
+        <app-task-overview *ngIf="projectDto" [projectId]="projectDto.projectId"/>
+
+    </div>
+    <div class="col-xxxl-4">
+        <div class="row">
+            <div class="col-lg-6 col-xxxl-12">
+
+                <!-- Team Members -->
+                <app-team-members *ngIf="projectDto" [projectId]="projectDto.projectId"/>
+            </div>
+            <div class="col-lg-6 col-xxxl-12">
+
+                <!-- Attachments -->
+                <app-attachments />
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -54,6 +54,11 @@ export class TimetableManagementComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe((params) => {
+      if (params.has('employeeId')) {
+        this.employeeId = +params.get('employeeId')!;
+      }
+    });
     this.initializeForm();
     this.loadTimetables();
   }
@@ -78,7 +83,6 @@ export class TimetableManagementComponent implements OnInit {
   }
 
   loadTimetables() {
-    this.employeeId = parseInt(this.route.snapshot.url[1]?.path);
     if (this.employeeId) {
       this.employeesServices.getTimetables(this.employeeId).subscribe({
         next: (response) => {

@@ -2,8 +2,10 @@ import { BehaviorSubject, map, take } from 'rxjs';
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from '../_models/user';
 import { environment } from '../environments/environments';
+import { routes } from '../app.routes';
 
 @Injectable({
   providedIn: 'root',
@@ -14,13 +16,13 @@ export class AuthService {
   currentUser$ = this.currentUserSource.asObservable();
   token: string;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   login(model: any) {
     const formValues = model.value;
     return this.http.post<User>(this.baseUrl + 'Login', formValues).pipe(
       map((response: User) => {
-        console.log(response)
+        console.log(response);
         const user = response;
         if (user) {
           this.setCurrentUser(user);
@@ -41,6 +43,7 @@ export class AuthService {
   logout() {
     localStorage.removeItem('user');
     this.currentUserSource.next(null);
+    this.router.navigate([''])
   }
 
   getDecodedToken(token: string) {

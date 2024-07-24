@@ -1,3 +1,5 @@
+import { PaginationParams } from "./pagination";
+
 export interface BusinessUnitDto {
   businessUnitId: number;
   businessUnitName: string;
@@ -15,11 +17,7 @@ export interface BusinessUnitNewDto {
   businessUnitInitials: string;
 }
 
-export class BusinessUnitParams {
+export class BusinessUnitParams extends PaginationParams  {
   businessUnitName = '';
   businessUnitInitials = '';
-  pageNumber = 0;
-  pageSize = 10;
-  orderBy = 'name';
-  orderDirection = '';
 }

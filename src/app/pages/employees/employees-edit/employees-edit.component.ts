@@ -66,7 +66,11 @@ export class EmployeesEditComponent implements OnInit {
     private fb: FormBuilder
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void { this.route.paramMap.subscribe((params) => {
+    if (params.has('employeesId')) {
+      this.employeesId = +params.get('employeesId')!;
+    }
+  });
     this.initializeForm();
     this.loadEmployee();
   }
@@ -81,7 +85,6 @@ export class EmployeesEditComponent implements OnInit {
   }
 
   loadEmployee() {
-    this.employeesId = parseInt(this.route.snapshot.url[1]?.path);
     if (this.employeesId > 0) {
       this.employeesService.getEmployees(this.employeesId).subscribe({
         next: (response) => {

@@ -1,3 +1,5 @@
+import { PaginationParams } from "./pagination";
+
 export interface EmployeesDto {
   employeeId: number;
   surname: string;
@@ -25,15 +27,11 @@ export class EmployeesEditDto {
   account: string;
 }
 
-export class EmployeesParam {
+export class EmployeesParam extends PaginationParams {
   firstName = '';
   surname = '';
   employeeSN = '';
   account = '';
-  pageNumber = 0;
-  pageSize = 10;
-  orderBy = '';
-  orderDirection = '';
   deleted = false;
 }
 

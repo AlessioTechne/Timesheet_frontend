@@ -67,6 +67,19 @@ export class BusinessUnitManagementComponent implements OnInit {
   ngOnInit(): void {
     this.loadBusinessUnit();
     this.initializeFilterForms();
+  }
+
+  ngAfterViewInit() {
+    if (this.sort) {
+      this.sort.sortChange.subscribe((sort: Sort) => {
+        if (this.businessUnitParams) {
+          this.businessUnitParams.orderBy = sort.active;
+          this.businessUnitParams.orderDirection = sort.direction;
+          this.loadBusinessUnit();
+        }
+      });
+    }
+
     this.filtersForm.valueChanges.subscribe((values) => {
       if (this.businessUnitParams) {
         this.businessUnitParams.businessUnitInitials =
@@ -83,15 +96,6 @@ export class BusinessUnitManagementComponent implements OnInit {
         this.loadBusinessUnit();
       }
     });
-    if (this.sort) {
-      this.sort.sortChange.subscribe((sort: Sort) => {
-        if (this.businessUnitParams) {
-          this.businessUnitParams.orderBy = sort.active;
-          this.businessUnitParams.orderDirection = sort.direction;
-          this.loadBusinessUnit();
-        }
-      });
-    }
   }
 
   initializeFilterForms() {

@@ -9,4 +9,10 @@ export interface Pagination {
     result?: T;
     pagination?: Pagination;
   }
+  export class PaginationParams {
+    pageNumber = 0;
+    pageSize = 10;
+    orderBy = 'defalut';
+    orderDirection = '';
+  }
   

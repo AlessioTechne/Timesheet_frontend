@@ -1,5 +1,5 @@
-import { CommonModule, DatePipe, NgClass } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { CommonModule, DatePipe, NgClass, registerLocaleData } from '@angular/common';
+import { Component, LOCALE_ID } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 
 import { AuthService } from '../../_services/auth.service';
@@ -7,6 +7,9 @@ import { FeathericonsModule } from '../../icons/feathericons/feathericons.module
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { ToggleService } from './toggle.service';
+import localeIt from '@angular/common/locales/it';
+
+registerLocaleData(localeIt, 'it');
 
 @Component({
   selector: 'app-header',
@@ -21,7 +24,7 @@ import { ToggleService } from './toggle.service';
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
-  providers: [DatePipe],
+  providers: [DatePipe, { provide: LOCALE_ID, useValue: 'it' }],
 })
 export class HeaderComponent {
   constructor(

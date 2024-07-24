@@ -5,14 +5,9 @@ import {
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
-  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
-import {
-  UserNewDto,
-  UserRolesDto,
-  UserUpdatesDto,
-} from '../../../_models/user';
+import { UserNewDto, UserUpdatesDto } from '../../../_models/user';
 
 import { AdminService } from '../../../_services/admin.service';
 import { CommonModule } from '@angular/common';
@@ -44,7 +39,7 @@ import { TextInputComponent } from '../../../_forms/text-input/text-input.compon
     MatIconModule,
     RouterLink,
     MatDividerModule,
-    TextInputComponent
+    TextInputComponent,
   ],
   templateUrl: './user-edit.component.html',
   styleUrl: './user-edit.component.scss',
@@ -66,6 +61,12 @@ export class UserEditComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe((params) => {
+      if (params.has('userId')) {
+        this.userId = +params.get('userId')!;
+      }
+
+    });
     this.loadRoles();
     this.initializeForm();
     this.loadUser();
@@ -75,7 +76,10 @@ export class UserEditComponent implements OnInit {
     this.userForm = this.fb.group({
       userName: ['', [Validators.required]],
       fullName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email, Validators.minLength(4)]],
+      email: [
+        '',
+        [Validators.required, Validators.email, Validators.minLength(4)],
+      ],
       roles: [[], Validators.required],
     });
   }
@@ -89,8 +93,7 @@ export class UserEditComponent implements OnInit {
   }
 
   loadUser() {
-    this.userId = parseInt(this.route.snapshot.url[1]?.path);
-    if (this.userId>0) {
+    if (this.userId > 0) {
       this.adminServices.getUserWithRoles(this.userId).subscribe({
         next: (response) => {
           this.userForm.patchValue({
@@ -121,14 +124,13 @@ export class UserEditComponent implements OnInit {
         this.adminServices.updateUserWithRoles(userUpdateDto).subscribe({
           complete: () => {
             this.router.navigate(['home/settings/admin-panel']);
-            this._snackBar.open('Utente modificato con successo', 'Chiudi');
+            this._snackBar.open('Utente modificato con successo', undefined, {
+              duration: 3 * 1000,
+            });
           },
           error: (e) => {
             console.log(e);
-            this._snackBar.open(
-              e.error,
-              'Chiudi'
-            );
+            this._snackBar.open(e.error, 'Chiudi');
           },
         });
       } else {
@@ -141,19 +143,18 @@ export class UserEditComponent implements OnInit {
         this.adminServices.createUserWithRoles(userNewDto).subscribe({
           complete: () => {
             this.router.navigate(['home/settings/admin-panel']);
-            this._snackBar.open('Utente creato con successo', 'Chiudi');
+            this._snackBar.open('Utente creato con successo', undefined, {
+              duration: 3 * 1000,
+            });
           },
           error: (e) => {
             console.log(e);
-            this._snackBar.open(
-              e.error,
-              'Chiudi'
-            );
+            this._snackBar.open(e.error, 'Chiudi');
           },
         });
       }
     } else {
-      this._snackBar.open('Attenzione form non valida!', 'Chiudi')
+      this._snackBar.open('Attenzione form non valida!', 'Chiudi');
       this.formSubmitted = false;
     }
   }
@@ -163,7 +164,9 @@ export class UserEditComponent implements OnInit {
       this.adminServices.deleteUser(this.userId).subscribe({
         next: () => {
           this.router.navigate(['home/settings/admin-panel']);
-          this._snackBar.open('Utente eliminato con successo', 'Chiudi');
+          this._snackBar.open('Utente eliminato con successo', undefined, {
+            duration: 3 * 1000,
+          });
         },
         error: (error) => {
           console.log(error);

@@ -1,26 +1,39 @@
 import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
 import { NavigationExtras, Router } from '@angular/router';
+import { catchError, delay, finalize, identity } from 'rxjs';
 
 import { AuthService } from '../_services/auth.service';
+import { LoadingService } from '../_services/loading.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { catchError } from 'rxjs';
+import { environment } from '../environments/environments';
 import { inject } from '@angular/core';
 
 export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
   // Inject the current `AuthService` and use it to get an authentication token:
-  const authToken = inject(AuthService).getAuthToken();
+  const authService = inject(AuthService);
   const _snakBar = inject(MatSnackBar);
   const router = inject(Router);
-  
+  const loadingService = inject(LoadingService);
+  let totalRequests = 0;
+
   // Clone the request to add the authentication header.
+  totalRequests++;
+  loadingService.setLoading(true);
 
   const authReq = req.clone({
     setHeaders: {
-      Authorization: `Bearer ${authToken}`,
+      Authorization: `Bearer ${authService.getAuthToken()}`,
     },
   });
 
   return next(authReq).pipe(
+    (environment.production ? identity : delay(1000)),
+    finalize(() => {
+      totalRequests--;
+      if (totalRequests === 0) {
+        loadingService.setLoading(false);
+      }
+    }),
     catchError((error: HttpErrorResponse) => {
       if (error) {
         switch (error.status) {
@@ -38,6 +51,7 @@ export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
             break;
           case 401:
             _snakBar.open('Unauthorized', error.status.toString());
+            authService.logout();
             break;
           case 403:
             _snakBar.open('Unauthorized', error.status.toString());
@@ -46,10 +60,7 @@ export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
             router.navigateByUrl('/not-found');
             break;
           case 500:
-            const navigationExtras: NavigationExtras = {
-              state: { error: error.error },
-            };
-            router.navigateByUrl('/server-error', navigationExtras);
+            _snakBar.open(error.error.message, error.status.toString());
             break;
           default:
             _snakBar.open('Something unexpected went wrong');

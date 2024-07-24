@@ -68,6 +68,11 @@ export class CustomerEditComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe((params) => {
+      if (params.has('customerId')) {
+        this.customerId = +params.get('customerId')!;
+      }
+    });
     this.initializeForm();
     this.loadCustomer();
   }
@@ -84,7 +89,6 @@ export class CustomerEditComponent implements OnInit {
   }
 
   loadCustomer() {
-    this.customerId = parseInt(this.route.snapshot.url[1]?.path);
     if (this.customerId > 0) {
       this.customerService.getCustomer(this.customerId).subscribe({
         next: (response) => {
@@ -136,10 +140,6 @@ export class CustomerEditComponent implements OnInit {
             this._snackBar.open('Cliente creato con successo', undefined, {
               duration: 3 * 1000,
             });
-          },
-          error: (e) => {
-            console.log(e);
-            this._snackBar.open(e.error, 'Chiudi');
           },
         });
       }
