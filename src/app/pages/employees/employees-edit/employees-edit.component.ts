@@ -86,7 +86,7 @@ export class EmployeesEditComponent implements OnInit {
 
   loadEmployee() {
     if (this.employeesId > 0) {
-      this.employeesService.getEmployees(this.employeesId).subscribe({
+      this.employeesService.getEmployee(this.employeesId).subscribe({
         next: (response) => {
           this.employees = response;
           this.employeesForm.patchValue({

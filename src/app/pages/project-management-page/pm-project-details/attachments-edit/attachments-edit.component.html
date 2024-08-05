@@ -1,0 +1,28 @@
+<h1 mat-dialog-title>
+    File Upload
+</h1>
+<form [formGroup]="form">
+<div mat-dialog-content>
+    <p>
+        Nome File
+    </p>
+    <mat-form-field class="mb-20">
+        <i-feather name="edit-3"></i-feather>
+        <input matInput formControlName="attachName" >
+    </mat-form-field>
+</div>
+
+
+    <file-upload class="file-uploader" [multiple]="multiple" formControlName="fileUpload"></file-upload>
+</form>
+
+
+
+<div mat-dialog-actions class="mt-0">
+    <button mat-flat-button color="primary" [disabled]="!form.valid" [mat-dialog-close]="true" (click)="onSave()" cdkFocusInitial>
+        Salva
+    </button>
+    <button mat-flat-button color="warn" (click)="onClose()" mat-dialog-close>
+        Annulla
+    </button>
+</div>

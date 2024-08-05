@@ -1,0 +1,21 @@
+<h2 mat-dialog-title>Impiegati</h2>
+
+<mat-dialog-content class="mat-typography">
+    <mat-selection-list #selected [(ngModel)]="selectedData">
+        @for (element of employees; track element) {
+        <mat-list-option color="primary" [value]="element" [disabled]="element.deleted">{{element.surname}} {{
+            element.firstName }}</mat-list-option>
+        }
+    </mat-selection-list>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button color="primary" (click)="onSave()" cdkFocusInitial>
+        Salva
+    </button>
+    <button *ngIf="saveAll" mat-button color="primary" (click)="onSaveAll()">
+        Salva per tutti
+    </button>
+    <button mat-button color="warn" (click)="onClose()" mat-dialog-close>
+        Annulla
+    </button>
+</mat-dialog-actions>

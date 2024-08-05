@@ -65,7 +65,6 @@ export class TeamMembersComponent implements OnInit {
 
   loadProjectMembers() {
     if (this.projectMemberParams) {
-      this.taskServices.setProjectMembersParams(this.projectMemberParams);
       this.taskServices
         .paginatedProjectMembers(this.projectMemberParams)
         .subscribe((response) => {
@@ -84,7 +83,6 @@ export class TeamMembersComponent implements OnInit {
     if (this.projectMemberParams) {
       this.projectMemberParams.pageNumber = event.pageIndex;
       this.projectMemberParams.pageSize = event.pageSize;
-      this.taskServices.setProjectMembersParams(this.projectMemberParams);
       this.loadProjectMembers();
     }
   }

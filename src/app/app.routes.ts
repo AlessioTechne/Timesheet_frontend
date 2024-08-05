@@ -10,6 +10,7 @@ import { CustomerManagementComponent } from './pages/customers/customer-manageme
 import { EmployeesComponent } from './pages/employees/employees/employees.component';
 import { EmployeesEditComponent } from './pages/employees/employees-edit/employees-edit.component';
 import { EmployeesManagementComponent } from './pages/employees/employees-management/employees-management.component';
+import { EmployeesOverviewComponent } from './pages/employees/employees-overview/employees-overview.component';
 import { LogoutComponent } from './authentication/logout/logout.component';
 import { NotFoundComponent } from './common/not-found/not-found.component';
 import { PmProjectDetailsComponent } from './pages/project-management-page/pm-project-details/pm-project-details.component';
@@ -65,6 +66,7 @@ export const routes: Routes = [
         component: EmployeesComponent,
         children: [
           { path: '', component: EmployeesManagementComponent },
+          { path: 'overview/:emplyeesId', component: EmployeesOverviewComponent },
           { path: 'edit', component: EmployeesEditComponent },
           { path: 'edit/:employeesId', component: EmployeesEditComponent },
           { path: 'timetable/:employeeId', component: TimetableManagementComponent },
@@ -94,7 +96,7 @@ export const routes: Routes = [
             component: TasksEditComponent,
           },
           {
-            path: 'taskDetail/:taskId',
+            path: 'taskDetail/:projectId/:taskId',
             component: SingleTaskOverviewComponent,
           },
         ],

@@ -1,0 +1,28 @@
+<mat-card class="trinta-card products-list-card mb-25 bg-white border-none d-block">
+    <mat-card-header>
+        <mat-card-title>
+            <h5 class="mt-0 mb-0">
+                Task Order
+            </h5>
+        </mat-card-title>
+        <mat-card-subtitle>
+
+        </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-list>
+            <mat-list-item>
+                <label mat-line>sales Order Number</label>
+                <p mat-line>{{task.salesOrderNumber}}</p>
+            </mat-list-item>
+            <mat-list-item>
+                <label mat-line>sales order date</label>
+                <p mat-line>{{task.salesOrderDate? (task.salesOrderDate | date: 'dd/MM/yyyy') : '--/--/----'}}</p>
+            </mat-list-item>
+            <mat-list-item>
+                <label mat-line>Cost Center</label>
+                <p mat-line>{{task.costCenter}}</p>
+            </mat-list-item>
+        </mat-list>
+    </mat-card-content>
+</mat-card>

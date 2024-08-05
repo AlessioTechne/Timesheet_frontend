@@ -114,6 +114,8 @@ export class PmProjectViewComponent implements OnInit {
     this.loadProject();
   }
 
+  
+
   initializeFilterForms() {
     this.filtersForm = this.fb.group({
       projectCode: [this.projectParams?.projectCode],

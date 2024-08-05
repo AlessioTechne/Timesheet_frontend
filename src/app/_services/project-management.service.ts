@@ -1,4 +1,14 @@
-import { ProjectEditDto, ProjectNewDto, ProjectParams, ProjectsDto } from '../_models/project';
+import {
+  AttachmentParams,
+  ProjectAttachmentsDto,
+  ProjectAttachmentsEditDto,
+} from '../_models/projectTask';
+import {
+  ProjectEditDto,
+  ProjectNewDto,
+  ProjectParams,
+  ProjectsDto,
+} from '../_models/project';
 import { getPaginatedResult, getPaginationheaders } from './paginationHelper';
 
 import { HttpClient } from '@angular/common/http';
@@ -7,15 +17,16 @@ import { environment } from '../environments/environments';
 import { map } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProjectManagementService {
-
   baseUrl = environment.apiUrl + 'project/';
   projectParams: ProjectParams | undefined;
+  attachmentParams: AttachmentParams | undefined;
 
   constructor(private http: HttpClient) {
     this.projectParams = new ProjectParams();
+    this.attachmentParams = new AttachmentParams();
   }
 
   paginatedProject(projectParams: ProjectParams) {
@@ -51,8 +62,16 @@ export class ProjectManagementService {
     return this.projectParams;
   }
 
+  getAttachmentsParams() {
+    return this.attachmentParams;
+  }
+
   setProjectParams(projectParams: ProjectParams) {
     this.projectParams = projectParams;
+  }
+
+  setAttachmentsParams(attachmentParams: AttachmentParams) {
+    this.attachmentParams = attachmentParams;
   }
 
   createProject(project: ProjectNewDto) {
@@ -69,5 +88,42 @@ export class ProjectManagementService {
 
   deleteProject(id: number) {
     return this.http.delete(this.baseUrl + id);
+  }
+
+  editAttachment(project: FormData) {
+    return this.http.put(this.baseUrl + 'projectAttachments', project);
+  }
+
+  newAttachment(project: FormData) {
+    return this.http.post(this.baseUrl + 'projectAttachments', project);
+  }
+
+  deleteAttachment(id: number) {
+    return this.http.delete(this.baseUrl + 'projectAttachments/' + id);
+  }
+
+  getPaginatedAttachment(attachmentParams: AttachmentParams) {
+    let params = getPaginationheaders(
+      attachmentParams.pageNumber,
+      attachmentParams.pageSize
+    );
+
+    params = params.append('orderBy', attachmentParams.orderBy);
+    params = params.append('projectId', attachmentParams.projectId);
+    params = params.append('orderDirection', attachmentParams.orderDirection);
+
+    return getPaginatedResult<ProjectAttachmentsDto[]>(
+      this.baseUrl + 'projectAttachments/',
+      params,
+      this.http
+    ).pipe(
+      map((response) => {
+        return response;
+      })
+    );
+  }
+
+  getAttachmentfile(id: number) {
+    return this.http.get(this.baseUrl + 'downloadAttachment/' + id, { observe:'response', responseType: 'blob' });
   }
 }

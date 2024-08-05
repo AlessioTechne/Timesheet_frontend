@@ -2,7 +2,6 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Component, Inject, OnInit } from '@angular/core';
 import {
   FormBuilder,
-  FormControl,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
@@ -17,6 +16,7 @@ import {
 import {
   TaskEditDto,
   TaskNewDto,
+  TaskOverviewDto,
   TasksDto,
 } from '../../../../_models/projectTask';
 
@@ -121,7 +121,6 @@ export class TasksEditComponent implements OnInit {
             estimatedEffortInDays: task.estimatedEffortInDays,
             actualStartDate: task.actualStartDate,
             actualEndDate: task.actualEndDate,
-            hasBudget: task.hasBudget,
             costCenter: task.costCenter,
           });
           this.pageTitle = 'Modifica Task';

@@ -71,7 +71,11 @@ export class EmployeesService {
     return this.http.put<EmployeesEditDto>(this.baseUrl, employees);
   }
 
-  getEmployees(id: number) {
+  getEmployees() {
+    return this.http.get<EmployeesDto[]>(this.baseUrl);
+  }
+
+  getEmployee(id: number) {
     return this.http.get<EmployeesDto>(this.baseUrl + id);
   }
 

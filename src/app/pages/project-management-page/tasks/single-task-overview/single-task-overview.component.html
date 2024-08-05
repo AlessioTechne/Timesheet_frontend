@@ -1,22 +1,19 @@
 <div class="row">
-    <div class="col-xxxl-8">
+    <div class="col-xxl-4">
 
-        <!-- Project Overview -->
-         <app-single-task-detail [taskId]="taskId"/>
+        <!-- Profile -->
+        <app-task-info *ngIf="task" [task]="task"></app-task-info>
+    </div>
+   
+    <div class="col-xxl-4">
+        <app-task-order *ngIf="task" [task]="task"></app-task-order>
+    </div>
+    <div class="col-xxl-4">
+        <app-task-employees *ngIf="taskId" [taskId]="taskId" [projectId]="projectId"></app-task-employees>
+    </div>
+    <div class="col-xxl-4">
+        <app-task-invoices *ngIf="task" [task]="task"></app-task-invoices>
 
     </div>
-    <div class="col-xxxl-4">
-        <div class="row">
-            <div class="col-lg-6 col-xxxl-12">
-
-                <!-- Team Members -->
-            </div>
-            <div class="col-lg-6 col-xxxl-12">
-
-                <!-- Attachments -->
-                <app-attachments />
-
-            </div>
-        </div>
-    </div>
+    
 </div>
