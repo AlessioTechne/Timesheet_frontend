@@ -6,19 +6,12 @@
             </h5>
         </mat-card-title>
         <mat-card-subtitle>
-            
+
         </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
         <mat-list>
-            <mat-list-item>
-                <label mat-line>Task Number</label>
-                <p mat-line>{{task.taskNumber}}</p>
-            </mat-list-item>
-            <mat-list-item>
-                <label mat-line>Task Name</label>
-                <p mat-line>{{task.taskName}}</p>
-            </mat-list-item>
+
             <mat-list-item>
                 <label mat-line>start date</label>
                 <p mat-line>{{task.actualStartDate | date: 'dd/MM/yyyy'}}</p>
@@ -27,11 +20,7 @@
                 <label mat-line>end date</label>
                 <p mat-line>{{task.actualEndDate? (task.actualEndDate | date: 'dd/MM/yyyy') : '--/--/----'}}</p>
             </mat-list-item>
-         
-            <mat-list-item>
-                <label mat-line>Estimated effort </label>
-                <p mat-line>{{task.estimatedEffortInDays.toFixed(1)}}</p>
-            </mat-list-item>           
+
         </mat-list>
     </mat-card-content>
 </mat-card>

@@ -27,7 +27,7 @@ export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
   });
 
   return next(authReq).pipe(
-    (environment.production ? identity : delay(1000)),
+    environment.production ? identity : delay(1000),
     finalize(() => {
       totalRequests--;
       if (totalRequests === 0) {
@@ -46,15 +46,21 @@ export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
               }
               throw modelStateError.flat();
             } else {
-              _snakBar.open(error.error, error.status.toString());
+              _snakBar.open(error.error, error.status.toString(), {
+                duration: 3 * 1000,
+              });
             }
             break;
           case 401:
-            _snakBar.open('Unauthorized', error.status.toString());
+            _snakBar.open('Unauthorized', error.status.toString(), {
+              duration: 3 * 1000,
+            });
             authService.logout();
             break;
           case 403:
-            _snakBar.open('Unauthorized', error.status.toString());
+            _snakBar.open('Unauthorized', error.status.toString(), {
+              duration: 3 * 1000,
+            });
             break;
           case 404:
             router.navigateByUrl('/not-found');
@@ -63,7 +69,9 @@ export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
             _snakBar.open(error.error.message, error.status.toString());
             break;
           default:
-            _snakBar.open('Something unexpected went wrong');
+            _snakBar.open('Something unexpected went wrong', undefined, {
+              duration: 3 * 1000,
+            });
             console.log(error);
             break;
         }

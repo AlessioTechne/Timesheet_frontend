@@ -63,7 +63,6 @@ export class CustomersService {
   }
 
   editCustomer(customer: CustomerEditDto) {
-    console.log(customer);
     return this.http.put<CustomerEditDto>(this.baseUrl, customer);
   }
 
@@ -73,5 +72,9 @@ export class CustomersService {
 
   deleteCustomer(id: number) {
     return this.http.delete(this.baseUrl + id);
+  }
+
+  getAllCustomers() {
+    return this.http.get<CustomerDto[]>(this.baseUrl + 'all');
   }
 }

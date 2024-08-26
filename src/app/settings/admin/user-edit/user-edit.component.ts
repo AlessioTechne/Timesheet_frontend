@@ -65,7 +65,6 @@ export class UserEditComponent implements OnInit {
       if (params.has('userId')) {
         this.userId = +params.get('userId')!;
       }
-
     });
     this.loadRoles();
     this.initializeForm();
@@ -128,10 +127,6 @@ export class UserEditComponent implements OnInit {
               duration: 3 * 1000,
             });
           },
-          error: (e) => {
-            console.log(e);
-            this._snackBar.open(e.error, 'Chiudi');
-          },
         });
       } else {
         var userNewDto: UserNewDto = {
@@ -146,10 +141,6 @@ export class UserEditComponent implements OnInit {
             this._snackBar.open('Utente creato con successo', undefined, {
               duration: 3 * 1000,
             });
-          },
-          error: (e) => {
-            console.log(e);
-            this._snackBar.open(e.error, 'Chiudi');
           },
         });
       }
@@ -167,10 +158,6 @@ export class UserEditComponent implements OnInit {
           this._snackBar.open('Utente eliminato con successo', undefined, {
             duration: 3 * 1000,
           });
-        },
-        error: (error) => {
-          console.log(error);
-          this._snackBar.open(error.error, 'Chiudi');
         },
       });
   }

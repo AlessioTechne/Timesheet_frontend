@@ -118,7 +118,6 @@ export class BusinessUnitManagementComponent implements OnInit {
               this.pagination = response.pagination;
             }
           },
-          error: (error) => console.log(error),
         });
     }
   }

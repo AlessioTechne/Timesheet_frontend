@@ -1,12 +1,12 @@
 import {
   AttachmentParams,
   ProjectAttachmentsDto,
-  ProjectAttachmentsEditDto,
 } from '../_models/projectTask';
 import {
   ProjectEditDto,
   ProjectNewDto,
   ProjectParams,
+  ProjectStatsOrderDto,
   ProjectsDto,
 } from '../_models/project';
 import { getPaginatedResult, getPaginationheaders } from './paginationHelper';
@@ -124,6 +124,19 @@ export class ProjectManagementService {
   }
 
   getAttachmentfile(id: number) {
-    return this.http.get(this.baseUrl + 'downloadAttachment/' + id, { observe:'response', responseType: 'blob' });
+    return this.http.get(this.baseUrl + 'downloadAttachment/' + id, {
+      observe: 'response',
+      responseType: 'blob',
+    });
+  }
+
+  getStatsOrder(projectId: number) {
+    return this.http.get<ProjectStatsOrderDto>(
+      this.baseUrl + 'statsOrder/' + projectId
+    );
+  }
+
+  getEditProject(projectId: number) {
+    return this.http.get<ProjectEditDto>(this.baseUrl + 'edit/' + projectId);
   }
 }

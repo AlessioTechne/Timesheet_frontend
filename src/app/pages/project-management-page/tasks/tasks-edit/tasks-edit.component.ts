@@ -1,4 +1,4 @@
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, Inject, OnInit } from '@angular/core';
 import {
   FormBuilder,
@@ -16,8 +16,8 @@ import {
 import {
   TaskEditDto,
   TaskNewDto,
-  TaskOverviewDto,
   TasksDto,
+  WorkPackageTypesDto,
 } from '../../../../_models/projectTask';
 
 import { CheckboxComponent } from '../../../../ui-elements/checkbox/checkbox.component';
@@ -32,11 +32,13 @@ import {
   DateAdapter,
   MAT_DATE_LOCALE,
   MatNativeDateModule,
+  MatOptionModule,
 } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TaskService } from '../../../../_services/task.service';
 import { TextInputComponent } from '../../../../_forms/text-input/text-input.component';
+import { NavigationService } from '../../../../_services/navigation.service';
 
 @Component({
   selector: 'app-tasks-edit',
@@ -60,6 +62,7 @@ import { TextInputComponent } from '../../../../_forms/text-input/text-input.com
     MatDatepickerInput,
     MatDatepickerToggle,
     MatNativeDateModule,
+    MatOptionModule,
   ],
   providers: [DatePipe, { provide: MAT_DATE_LOCALE, useValue: 'it-IT' }],
   templateUrl: './tasks-edit.component.html',
@@ -70,6 +73,7 @@ export class TasksEditComponent implements OnInit {
   formSubmitted: boolean = false;
   pageTitle: string;
   taskDto: TasksDto;
+  wptype: WorkPackageTypesDto[];
 
   taskId: number;
   projectId: number;
@@ -80,6 +84,7 @@ export class TasksEditComponent implements OnInit {
     private router: Router,
     private _snackBar: MatSnackBar,
     private fb: FormBuilder,
+    private navigationService: NavigationService,
     private _adapter: DateAdapter<any>,
     @Inject(MAT_DATE_LOCALE) private _locale: string
   ) {}
@@ -96,17 +101,19 @@ export class TasksEditComponent implements OnInit {
       }
     });
     this.initializeForm();
+    this.loadWPTypes();
     this.loadTask();
   }
 
   initializeForm() {
     this.taskForm = this.fb.group({
       taskNumber: [0, [Validators.required]],
-      taskName: ['', [Validators.required, Validators.maxLength(11)]],
+      taskName: ['', [Validators.required]],
       estimatedEffortInDays: [''],
       actualStartDate: [new Date(), [Validators.required]],
       actualEndDate: [new Date()],
       costCenter: [''],
+      wpTypeId: [null, [Validators.required]],
     });
   }
 
@@ -122,6 +129,7 @@ export class TasksEditComponent implements OnInit {
             actualStartDate: task.actualStartDate,
             actualEndDate: task.actualEndDate,
             costCenter: task.costCenter,
+            wpTypeId: this.wptype.find((x) => x.wpTypeId == task.wpTypeId),
           });
           this.pageTitle = 'Modifica Task';
         },
@@ -133,7 +141,6 @@ export class TasksEditComponent implements OnInit {
 
   onSubmit() {
     this.formSubmitted = true;
-    console.log(this.taskForm);
     if (this.taskForm.valid) {
       if (this.taskId) {
         var taskEditDto: TaskEditDto = {
@@ -148,12 +155,11 @@ export class TasksEditComponent implements OnInit {
             ? true
             : false,
           costCenter: this.taskForm.controls['costCenter'].value ?? '',
+          wPTYpeId: this.taskForm.controls['wpTypeId'].value,
         };
         this.taskService.editTask(taskEditDto).subscribe({
           complete: () => {
-            this.router.navigate([
-              'home/project-management/detail/' + this.projectId,
-            ]);
+            this.router.navigate([this.navigationService.getPreviousUrl()]);
             this._snackBar.open('Task modificato con successo', undefined, {
               duration: 3 * 1000,
             });
@@ -172,12 +178,11 @@ export class TasksEditComponent implements OnInit {
             ? true
             : false,
           costCenter: this.taskForm.controls['costCenter'].value ?? '',
+          wpTypeId: this.taskForm.controls['wpTypeId'].value,
         };
         this.taskService.createNewTask(taskNewDto).subscribe({
           complete: () => {
-            this.router.navigate([
-              'home/project-management/detail/' + this.projectId,
-            ]);
+            this.router.navigate([this.navigationService.getPreviousUrl()]);
             this._snackBar.open('Task creato con successo', undefined, {
               duration: 3 * 1000,
             });
@@ -190,21 +195,19 @@ export class TasksEditComponent implements OnInit {
     }
   }
 
+  loadWPTypes() {
+    this.taskService.getWPTypes().subscribe({
+      next: (response) => {
+        this.wptype = response;
+      },
+    });
+  }
+
   onDelete() {
     throw new Error('Method not implemented.');
   }
 
   onCancel() {
-    this.router.navigate(['home/project-management/detail/' + this.projectId]);
-  }
-
-  private formatDate(date: Date) {
-    const d = new Date(date);
-    let month = '' + (d.getMonth() + 1);
-    let day = '' + d.getDate();
-    const year = d.getFullYear();
-    if (month.length < 2) month = '0' + month;
-    if (day.length < 2) day = '0' + day;
-    return [day, month, year].join('/');
+    this.router.navigate([this.navigationService.getPreviousUrl()]);
   }
 }

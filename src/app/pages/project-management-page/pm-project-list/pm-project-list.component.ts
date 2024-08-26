@@ -10,10 +10,16 @@ import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-pm-project-list',
   standalone: true,
-  imports: [RouterLink, MatCardModule, MatButtonModule, MatMenuModule, MatTabsModule, PmProjectViewComponent,MatIcon],
+  imports: [
+    RouterLink,
+    MatCardModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatTabsModule,
+    PmProjectViewComponent,
+    MatIcon,
+  ],
   templateUrl: './pm-project-list.component.html',
-  styleUrl: './pm-project-list.component.scss'
+  styleUrl: './pm-project-list.component.scss',
 })
-export class PmProjectListComponent {
-
-}
+export class PmProjectListComponent {}

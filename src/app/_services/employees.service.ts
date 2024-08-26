@@ -67,7 +67,6 @@ export class EmployeesService {
   }
 
   editEmployees(employees: EmployeesEditDto) {
-    console.log(employees);
     return this.http.put<EmployeesEditDto>(this.baseUrl, employees);
   }
 
@@ -94,5 +93,9 @@ export class EmployeesService {
       this.baseUrl + 'timetable',
       employeeTimetablesUpdateDto
     );
+  }
+
+  getAllEmployees() {
+    return this.http.get<EmployeesDto[]>(this.baseUrl + 'all');
   }
 }

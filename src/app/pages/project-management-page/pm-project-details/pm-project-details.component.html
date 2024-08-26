@@ -1,24 +1,23 @@
-<!-- Stats -->
-<app-stats *ngIf="projectDto"  [project]="projectDto"/>
-
 <div class="row">
     <div class="col-xxxl-8">
+        <app-about *ngIf="projectDto" [project]="projectDto" />
+
+        <app-stats-order *ngIf="projectDto" [projectId]="projectDto.projectId" />
 
         <!-- Project Overview -->
-        <app-task-overview *ngIf="projectDto" [projectId]="projectDto.projectId"/>
+        <app-task-overview *ngIf="projectDto" [projectId]="projectDto.projectId" />
 
     </div>
     <div class="col-xxxl-4">
         <div class="row">
             <div class="col-lg-6 col-xxxl-12">
-
+                <app-stats *ngIf="projectDto" [project]="projectDto" />
                 <!-- Team Members -->
-                <app-team-members *ngIf="projectDto" [projectId]="projectDto.projectId"/>
-            </div>
-            <div class="col-lg-6 col-xxxl-12">
+                <app-team-members *ngIf="projectDto" [projectId]="projectDto.projectId" />
+
 
                 <!-- Attachments -->
-                <app-attachments *ngIf="projectDto" [projectId]="projectId"/>
+                <app-attachments *ngIf="projectDto" [projectId]="projectId" />
 
             </div>
         </div>

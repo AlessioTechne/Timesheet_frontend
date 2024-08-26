@@ -60,6 +60,7 @@ export class AttachmentsComponent implements OnInit {
     this.attachmentsParams = this.projectServices.getAttachmentsParams();
     if (this.attachmentsParams) {
       this.attachmentsParams.projectId = this.projectId;
+      this.attachmentsParams.pageSize = 5;
     }
     this.loadAttachments();
   }
@@ -81,7 +82,6 @@ export class AttachmentsComponent implements OnInit {
   }
 
   loadAttachments() {
-    console.log(this.attachmentsParams);
     if (this.attachmentsParams) {
       this.projectServices.setAttachmentsParams(this.attachmentsParams);
 
@@ -139,7 +139,6 @@ export class AttachmentsComponent implements OnInit {
   downloadAttach(id: number) {
     this.projectServices.getAttachmentfile(id).subscribe({
       next: (response) => {
-        console.log(response);
         if (response.body !== null) {
         const blob = new Blob([response.body], { type: 'application/pdf' });
         const url = window.URL.createObjectURL(blob);

@@ -57,7 +57,6 @@ export class BusinessUnitService {
   }
 
   editBusinessUnit(businessUnit: BusinessUnitEditDto) {
-    console.log(businessUnit);
     return this.http.put<BusinessUnitEditDto>(this.baseUrl, businessUnit);
   }
 
@@ -67,5 +66,9 @@ export class BusinessUnitService {
 
   deleteBusinessUnit(id: number) {
     return this.http.delete(this.baseUrl + id);
+  }
+  
+  getAllBusinessUnits() {
+    return this.http.get<BusinessUnitDto[]>(this.baseUrl + 'all');
   }
 }

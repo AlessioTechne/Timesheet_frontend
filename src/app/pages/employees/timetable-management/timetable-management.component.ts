@@ -143,10 +143,6 @@ export class TimetableManagementComponent implements OnInit {
             }
           });
         },
-        error: (e) => {
-          console.log(e);
-          this._snackBar.open('Errore nel caricamento dei dati', 'Chiudi');
-        },
       });
     }
   }
@@ -156,7 +152,6 @@ export class TimetableManagementComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.timeTableForm.controls);
     if (this.timeTableForm.valid) {
       var list: EmployeeTimetablesDto[] = [];
       for (let i = 1; i < 8; i++) {
@@ -179,10 +174,6 @@ export class TimetableManagementComponent implements OnInit {
             duration: 3 * 1000,
           });
           this.router.navigate(['home/employees']);
-        },
-        error: (e) => {
-          console.log(e);
-          this._snackBar.open(e.message, 'Chiudi');
         },
       });
     }

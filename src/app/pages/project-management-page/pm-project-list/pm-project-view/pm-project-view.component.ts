@@ -26,6 +26,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { Pagination } from '../../../../_models/pagination';
+import { PmProjectExpandComponent } from '../pm-project-expand/pm-project-expand.component';
 import { ProjectManagementService } from '../../../../_services/project-management.service';
 import { RouterLink } from '@angular/router';
 import localeIt from '@angular/common/locales/it';
@@ -50,6 +51,7 @@ registerLocaleData(localeIt, 'it');
     FeatherModule,
     FormsModule,
     ReactiveFormsModule,
+    PmProjectExpandComponent
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'it' }],
   animations: [

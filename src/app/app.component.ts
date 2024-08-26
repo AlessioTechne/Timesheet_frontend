@@ -24,6 +24,7 @@ import { User } from './_models/user';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { LoadingService } from './_services/loading.service';
 import { MatCard, MatCardModule } from '@angular/material/card';
+import { NavigationService } from './_services/navigation.service';
 
 @Component({
   selector: 'app-root',
@@ -59,6 +60,7 @@ export class AppComponent implements AfterContentChecked {
     private authServices: AuthService,
     public loadingService: LoadingService,
     private changeDetector: ChangeDetectorRef,
+    private navigationService: NavigationService,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {
     this.toggleService.isToggled$.subscribe((isToggled) => {

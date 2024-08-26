@@ -64,7 +64,7 @@ export class CustomerManagementComponent implements OnInit {
   ) {
     this.customerParams = customerServices.getCustomerParams();
   }
-  
+
   ngOnInit(): void {
     this.loadCustomer();
     this.initializeFilterForms();
@@ -113,7 +113,6 @@ export class CustomerManagementComponent implements OnInit {
             this.pagination = response.pagination;
           }
         },
-        error: (error) => console.log(error),
       });
     }
   }

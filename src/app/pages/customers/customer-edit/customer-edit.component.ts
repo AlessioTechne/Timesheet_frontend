@@ -123,10 +123,6 @@ export class CustomerEditComponent implements OnInit {
               duration: 3 * 1000,
             });
           },
-          error: (e) => {
-            console.log(e);
-            this._snackBar.open(e.error, 'Chiudi');
-          },
         });
       } else {
         var customerNewDto: CustomerNewDto = {
@@ -157,12 +153,6 @@ export class CustomerEditComponent implements OnInit {
         next: () => {
           this.router.navigate(['home/customer']);
           this._snackBar.open('Cliente eliminato con successo', undefined, {
-            duration: 3 * 1000,
-          });
-        },
-        error: (error) => {
-          console.log(error);
-          this._snackBar.open('Si è verificato un errore', undefined, {
             duration: 3 * 1000,
           });
         },

@@ -89,7 +89,7 @@ export const routes: Routes = [
           { path: 'all/:status', component: PmProjectViewComponent },
           { path: 'detail/:idProject', component: PmProjectDetailsComponent },
           { path: 'edit', component: PmProjectEditComponent },
-          { path: 'edit/:id', component: PmProjectEditComponent },
+          { path: 'edit/:projectId', component: PmProjectEditComponent },
           { path: 'taskEdit/:idProject', component: TasksEditComponent },
           {
             path: 'taskEdit/:idProject/:idTask',

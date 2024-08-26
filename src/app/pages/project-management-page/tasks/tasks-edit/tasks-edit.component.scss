@@ -1,0 +1,21 @@
+ 
+  .label-group {
+    display: flex;
+    flex-wrap: wrap; /* Permette il wrap delle label se non c'è abbastanza spazio */
+    justify-content: flex-end; /* Allinea le label a destra */
+    gap: 10px; /* Spazio tra le label */
+    position: absolute; /* Posiziona relativo al contenuto del mat-card */
+    bottom: 0; /* In basso */
+    right: 0; /* A destra */
+    margin: 20px; /* Margine esterno */
+    color: gray; /* Colore del testo grigio */
+    font-size: 0.75rem; /* Dimensione del testo leggermente più piccola */
+  }
+  
+  .label-group label {
+    white-space: nowrap; /* Evita il wrap del testo su più linee */
+    background-color: #f0f0f0; /* Colore di sfondo grigio */
+    padding: 5px 10px; /* Padding interno */
+    border-radius: 5px; /* Bordi arrotondati */
+  }
+  

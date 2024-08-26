@@ -59,6 +59,7 @@ export class TeamMembersComponent implements OnInit {
   ngOnInit(): void {
     if (this.projectMemberParams) {
       this.projectMemberParams.projectId = this.projectId;
+      this.projectMemberParams.pageSize = 5;
       this.loadProjectMembers();
     }
   }

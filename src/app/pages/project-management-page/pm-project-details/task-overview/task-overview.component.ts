@@ -34,7 +34,6 @@ import { RouterLink } from '@angular/router';
 import { TaskService } from '../../../../_services/task.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogMembersComponent } from '../dialog-members/dialog-members.component';
-import { EmployeesDto } from '../../../../_models/employees';
 
 @Component({
   selector: 'app-task-overview',
@@ -103,6 +102,7 @@ export class TaskOverviewComponent implements OnInit {
     this.taskParams = this.taskService.getTaskParams();
     if (this.taskParams) {
       this.taskParams.projectId = this.projectId;
+      this.taskParams.pageSize = 5;
       this.loadTasks();
     }
   }
@@ -184,7 +184,6 @@ export class TaskOverviewComponent implements OnInit {
             employees: result.data,
           };
 
-          console.log(result)
           if (result.all) {
             this.taskService.setAssignAllTask(assignTaskDto).subscribe({
               next: () => {

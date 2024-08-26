@@ -5,6 +5,7 @@ export interface TasksDto {
   taskId: number;
   taskNumber: number;
   taskName: string;
+  wpTypeId: string;
   actualStartDate: string;
   actualEndDate: string;
   estimatedEffortInDays: number;
@@ -24,6 +25,7 @@ export class TaskNewDto {
   actualEndDate: Date;
   hasBudget: boolean;
   costCenter: string;
+  wpTypeId: string;
 }
 
 export class TaskEditDto {
@@ -35,6 +37,7 @@ export class TaskEditDto {
   actualEndDate: Date;
   hasBudget: boolean;
   costCenter: string;
+  wPTYpeId: string;
 }
 
 export class TaskParams extends PaginationParams {
@@ -153,3 +156,7 @@ export interface TaskDetailsDto {
   modifiedAt: Date;
 }
 
+export interface WorkPackageTypesDto {
+  wpTypeId: string;
+  wpTypeName: string;
+}

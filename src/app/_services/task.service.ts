@@ -12,6 +12,7 @@ import {
   TaskOverviewDto,
   TaskParams,
   TasksDto,
+  WorkPackageTypesDto,
 } from '../_models/projectTask';
 import { getPaginatedResult, getPaginationheaders } from './paginationHelper';
 
@@ -142,5 +143,9 @@ export class TaskService implements OnInit {
 
   setAssignAllTask(employees: TaskEmployeesDto) {
     return this.http.put(this.baseUrl + 'assignAllEmployees', employees);
+  }
+
+  getWPTypes() {
+    return this.http.get<WorkPackageTypesDto[]>(this.baseUrl + 'wptype');
   }
 }

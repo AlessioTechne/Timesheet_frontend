@@ -1,0 +1,44 @@
+<mat-card class="trinta-card basic-form mb-25 bg-white border-none d-block">
+    <mat-card-content>
+        <form [formGroup]="form">
+            <div class="row">
+
+            <div class="col-md-4 col-xxl-4">
+                <label class="label d-block fw-medium mb-10">projectLeader
+                </label>
+                <mat-form-field>
+                    <input matInput formControlName="projectLeader" readonly>
+                </mat-form-field>
+            </div>
+            <div class="col-md-4 col-xxl-4">
+                <label class="label d-block fw-medium mb-10">customerReference
+                </label>
+                <mat-form-field>
+                    <input matInput formControlName="customerReference" readonly>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6 col-xxl-4">
+                <label class="label d-block fw-medium mb-10">totEstimatedEffortInDays
+                </label>
+                <mat-form-field>
+                    <input matInput formControlName="totEstimatedEffortInDays" readonly>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6 col-xxl-4">
+                <label class="label d-block fw-medium mb-10">totTaskLoggedDays
+                </label>
+                <mat-form-field>
+                    <input matInput formControlName="totTaskLoggedDays" readonly>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6 col-xxl-4">
+                <label class="label d-block fw-medium mb-10">totNotBudgetedTaskLoggedDays
+                </label>
+                <mat-form-field>
+                    <input matInput formControlName="totNotBudgetedTaskLoggedDays" readonly>
+                </mat-form-field>
+            </div>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>

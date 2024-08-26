@@ -1,20 +1,23 @@
 <h1 mat-dialog-title>
     File Upload
 </h1>
-<form [formGroup]="form">
-<div mat-dialog-content>
-    <p>
-        Nome File
-    </p>
+<mat-card class="trinta-card mb-25 bg-white border-none d-block">
+    <mat-card-content>
+
+<form [formGroup]="form" class="form-container">
+<div mat-dialog-content>    
     <mat-form-field class="mb-20">
+        <mat-label>Nome File</mat-label>
         <i-feather name="edit-3"></i-feather>
         <input matInput formControlName="attachName" >
     </mat-form-field>
 </div>
 
-
     <file-upload class="file-uploader" [multiple]="multiple" formControlName="fileUpload"></file-upload>
+
+
 </form>
+</mat-card-content>
 
 
 
@@ -26,3 +29,4 @@
         Annulla
     </button>
 </div>
+</mat-card>

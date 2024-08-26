@@ -1,0 +1,78 @@
+<div class="row" *ngIf="projectStats">
+    <div class="col-xxxl-4 col-sm-6 col-md-4">
+        <mat-card class="trinta-card pm-stat-card mb-25 bg-white border-none d-block text-center">
+            <mat-card-content>
+                <span class="d-block text-gray">
+                    Numero Preventivo
+                </span>
+                <h5>
+                    {{projectStats.quoteNumber? projectStats.quoteNumber : '--'}}
+                </h5>
+                <span class="d-block text-gray">
+                    Data Preventivo
+                </span>
+                <h5>
+                    {{projectStats.quoteDate? (projectStats.quoteDate | date:'dd MMM yyyy') : '--/--/----'}}
+                </h5>
+                <span class="d-block text-gray">
+                    Totale Preventivo
+                </span>
+                <h5>
+                    {{projectStats.quoteAmount? projectStats.quoteAmount : '--'}}
+                </h5>
+
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+    <div class="col-xxxl-4 col-sm-6 col-md-4">
+        <mat-card class="trinta-card pm-stat-card mb-25 bg-white border-none d-block text-center">
+            <mat-card-content>
+                <span class="d-block text-gray">
+                    Numero Ordine
+                </span>
+                <h5>
+                    {{projectStats.salesOrderNumber? projectStats.salesOrderNumber : '--'}}
+                </h5>
+                <span class="d-block text-gray">
+                    Data Ordine
+                </span>
+                <h5>
+                    {{projectStats.salesOrderDate? (projectStats.salesOrderDate | date:'dd MMM yyyy') : '--/--/----'}}
+                </h5>
+                <span class="d-block text-gray">
+                    Totale Ordine
+                </span>
+                <h5>
+                    {{projectStats.salesOrderAmount ? projectStats.salesOrderAmount : '--'}}
+                </h5>
+
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+    <div class="col-xxxl-4 col-sm-6 col-md-4">
+        <mat-card class="trinta-card pm-stat-card mb-25 bg-white border-none d-block text-center">
+            <mat-card-content>
+                <span class="d-block text-gray">
+                    Numero Fattura
+                </span>
+                <h5>
+                    {{projectStats.invoiceNumber? projectStats.invoiceNumber : '--'}}
+                </h5>
+
+            </mat-card-content>
+            <mat-card-content>
+                <span class="d-block text-gray">
+                    Data Fattura
+                </span>
+                <h5>
+                    {{projectStats.invoiceDate? (projectStats.invoiceDate | date:'dd MMM yyyy') : '--/--/----'}}
+                </h5>
+
+            </mat-card-content>
+
+        </mat-card>
+    </div>
+
+</div>

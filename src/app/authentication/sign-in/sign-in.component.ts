@@ -54,11 +54,8 @@ export class SignInComponent {
   onSubmit() {
     if (this.authForm.valid) {
       this.authService.login(this.authForm).subscribe({
-        next: (response) => {
+        next: () => {
           this.router.navigateByUrl('/home');
-        },
-        error: (error) => {
-          console.log(error);
         },
       });
     } else {

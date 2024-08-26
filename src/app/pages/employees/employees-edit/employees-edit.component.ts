@@ -66,11 +66,12 @@ export class EmployeesEditComponent implements OnInit {
     private fb: FormBuilder
   ) {}
 
-  ngOnInit(): void { this.route.paramMap.subscribe((params) => {
-    if (params.has('employeesId')) {
-      this.employeesId = +params.get('employeesId')!;
-    }
-  });
+  ngOnInit(): void {
+    this.route.paramMap.subscribe((params) => {
+      if (params.has('employeesId')) {
+        this.employeesId = +params.get('employeesId')!;
+      }
+    });
     this.initializeForm();
     this.loadEmployee();
   }
@@ -105,7 +106,6 @@ export class EmployeesEditComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.employeesForm.valid);
     this.formSubmitted = true;
     if (this.employeesForm.valid) {
       if (this.employeesId) {
@@ -123,10 +123,6 @@ export class EmployeesEditComponent implements OnInit {
               duration: 3 * 1000,
             });
           },
-          error: (e) => {
-            console.log(e);
-            this._snackBar.open(e.error, 'Chiudi');
-          },
         });
       } else {
         var customerNewDto: EmployeesNewDto = {
@@ -141,10 +137,6 @@ export class EmployeesEditComponent implements OnInit {
             this._snackBar.open('Utente creato con successo', undefined, {
               duration: 3 * 1000,
             });
-          },
-          error: (e) => {
-            console.log(e);
-            this._snackBar.open(e.error, 'Chiudi');
           },
         });
       }
@@ -174,10 +166,6 @@ export class EmployeesEditComponent implements OnInit {
               duration: 3 * 1000,
             });
           }
-        },
-        error: (error) => {
-          console.log(error);
-          this._snackBar.open('Si è verificato un errore', 'Chiudi');
         },
       });
     }

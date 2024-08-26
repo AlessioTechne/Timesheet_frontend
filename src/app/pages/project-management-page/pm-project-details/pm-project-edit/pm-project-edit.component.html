@@ -1,91 +1,240 @@
-<mat-card
-    class="trinta-card add-project-card mb-25 bg-white border-none d-block"
->
+<mat-card class="trinta-card mb-25 bg-white border-none d-block">
     <mat-card-header>
         <mat-card-title>
             <h5 class="mt-0 mb-0">
-                Nuovo Progetto
+                {{titlePage}}
             </h5>
         </mat-card-title>
     </mat-card-header>
     <mat-card-content>
-        <form>
+        <form [formGroup]="projectForm" class="form-container">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-6">
                     <label class="label d-block fw-medium mb-10">
                         Project Name
                     </label>
                     <mat-form-field>
                         <i-feather name="edit-3"></i-feather>
                         <mat-label>Enter project title</mat-label>
-                        <input matInput>
+                        <input matInput [formControl]="$any(projectForm.controls['projectName'])">
                     </mat-form-field>
                 </div>
-               
-                <div class="col-lg-12">
+
+                <div class="col-sm-6">
                     <label class="label d-block fw-medium mb-10">
-                        Project Budget
+                        Codice Progetto
                     </label>
                     <mat-form-field>
                         <i-feather name="dollar-sign"></i-feather>
-                        <mat-label>Enter budget</mat-label>
-                        <input matInput>
+                        <mat-label>Inserire Codice Progetto</mat-label>
+                        <input matInput [formControl]="$any(projectForm.controls['projectCode'])">
                     </mat-form-field>
                 </div>
-                <div class="col-lg-6">
+
+                <div class="col-sm-4">
                     <label class="label d-block fw-medium mb-10">
-                        Start Date
+                        Estimated effort
+                    </label>
+                    <mat-form-field>
+                        <i-feather name="dollar-sign"></i-feather>
+                        <mat-label>Inserire Codice Progetto</mat-label>
+                        <input matInput type="number"
+                            [formControl]="$any(projectForm.controls['estimatedEffortInDays'])">
+                    </mat-form-field>
+                </div>
+
+                <div class="col-lg-4">
+                    <label class="label d-block fw-medium mb-10">
+                        Data Scadenza
                     </label>
                     <mat-form-field>
                         <i-feather name="calendar"></i-feather>
                         <mat-label>Enter start date</mat-label>
-                        <input matInput [matDatepicker]="picker">
+                        <input matInput [matDatepicker]="picker" [formControl]="$any(projectForm.controls['dueDate'])">
                         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
                     </mat-form-field>
                 </div>
-                <div class="col-lg-6">
+
+                <div class="col-sm-4">
                     <label class="label d-block fw-medium mb-10">
-                        End Date
+                        employee
                     </label>
                     <mat-form-field>
-                        <i-feather name="calendar"></i-feather>
-                        <mat-label>Enter end date</mat-label>
-                        <input matInput [matDatepicker]="picker2">
-                        <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
-                        <mat-datepicker #picker2></mat-datepicker>
+                        <i-feather name="map"></i-feather>
+                        <mat-label>employee</mat-label>
+                        <input type="text" placeholder="Pick one" matInput
+                            [formControl]="$any(projectForm.controls['employees'])" [matAutocomplete]="autoEmployees">
+                        <mat-autocomplete #autoEmployees="matAutocomplete" [displayWith]="employeesVal()">
+                            <mat-option *ngFor="let option of filteredEmployees" [value]="option">{{option.surname}}
+                                {{option.firstName}}</mat-option>
+                        </mat-autocomplete>
                     </mat-form-field>
                 </div>
-               
-                <div class="col-lg-12">
+
+                <div class="col-sm-4">
                     <label class="label d-block fw-medium mb-10">
-                        Team Member
+                        Cliente
                     </label>
                     <mat-form-field>
-                        <i-feather name="user"></i-feather>
-                        <mat-label>Select name</mat-label>
-                        <mat-select multiple>
-                            <mat-option value="Marcus Davis">Marcus Davis</mat-option>
-                            <mat-option value="Charlotte Lee">Charlotte Lee</mat-option>
-                            <mat-option value="William Anderson">William Anderson</mat-option>
-                            <mat-option value="Sarah Rodriguez">Sarah Rodriguez</mat-option>
-                            <mat-option value="Emily Johnson">Emily Johnson</mat-option>
-                            <mat-option value="Thomas Johnson">Thomas Johnson</mat-option>
-                            <mat-option value="Martine Jeck">Martine Jeck</mat-option>
-                            <mat-option value="Benjamin Clark">Benjamin Clark</mat-option>
-                        </mat-select>
+                        <i-feather name="map"></i-feather>
+                        <mat-label>Cliente</mat-label>
+                        <input type="text" placeholder="Pick one" matInput
+                            [formControl]="$any(projectForm.controls['customer'])" [matAutocomplete]="autoCustomer">
+                        <mat-autocomplete #autoCustomer="matAutocomplete" [displayWith]="customerVal()">
+                            <mat-option *ngFor="let option of filteredCustomer"
+                                [value]="option">{{option.customerName}}</mat-option>
+                        </mat-autocomplete>
                     </mat-form-field>
-                   
                 </div>
-               
+
+                <div class="col-sm-4">
+                    <label class="label d-block fw-medium mb-10">
+                        Business Unit
+                    </label>
+                    <mat-form-field>
+                        <i-feather name="list"></i-feather>
+                        <mat-label>Business Unit</mat-label>
+                        <input type="text" placeholder="Pick one" matInput
+                            [formControl]="$any(projectForm.controls['businessUnit'])"
+                            [matAutocomplete]="autoBusinessUnit">
+                        <mat-autocomplete #autoBusinessUnit="matAutocomplete" [displayWith]="businessUnitsVal()">
+                            <mat-option *ngFor="let option of filteredBusinessUnits"
+                                [value]="option">{{option.businessUnitInitials}}
+                                {{option.businessUnitName}}</mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-sm-12">
+                    <label class="label d-block fw-medium mb-10">
+                        Note
+                    </label>
+                    <mat-form-field class="textarea">
+                        <i-feather name="file-text"></i-feather>
+                        <mat-label>Note</mat-label>
+                        <textarea matInput [formControl]="$any(projectForm.controls['notes'])"
+                            placeholder="Ex. It makes me feel..."></textarea>
+                    </mat-form-field>
+                </div>
+
+
             </div>
-            <div class="create-project-btn">
-                <button mat-button type="button" [routerLink]="'/home/project-management'" color="warn">
-                    Chiudi
-                </button>
-                <button mat-button type="button">
+            <div *ngIf="projectId">
+                <mat-divider></mat-divider>
+                <br>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label class="label d-block fw-medium mb-10">
+                            Numero Preventivo
+                        </label>
+                        <mat-form-field>
+                            <i-feather name="edit-3"></i-feather>
+                            <mat-label>Enter project title</mat-label>
+                            <input matInput [formControl]="$any(projectForm.controls['quoteNumber'])">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-lg-4">
+                        <label class="label d-block fw-medium mb-10">
+                            Data Preventivo
+                        </label>
+                        <mat-form-field>
+                            <i-feather name="calendar"></i-feather>
+                            <mat-label>Enter start date</mat-label>
+                            <input matInput [matDatepicker]="quoteDatePicker"
+                                [formControl]="$any(projectForm.controls['quoteDate'])">
+                            <mat-datepicker-toggle matIconSuffix [for]="quoteDatePicker"></mat-datepicker-toggle>
+                            <mat-datepicker #quoteDatePicker></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-lg-4">
+                        <label class="label d-block fw-medium mb-10">
+                            Totale Preventivo
+                        </label>
+                        <mat-form-field>
+                            <i-feather name="edit-3"></i-feather>
+                            <mat-label>Enter project title</mat-label>
+                            <input matInput type="number" [formControl]="$any(projectForm.controls['quoteAmount'])">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <mat-divider></mat-divider>
+                <br>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label class="label d-block fw-medium mb-10">
+                            Numero Ordine
+                        </label>
+                        <mat-form-field>
+                            <i-feather name="edit-3"></i-feather>
+                            <mat-label>Enter project title</mat-label>
+                            <input matInput [formControl]="$any(projectForm.controls['salesOrderNumber'])">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-lg-4">
+                        <label class="label d-block fw-medium mb-10">
+                            Data Ordine
+                        </label>
+                        <mat-form-field>
+                            <i-feather name="calendar"></i-feather>
+                            <mat-label>Enter start date</mat-label>
+                            <input matInput [matDatepicker]="salesOrderDatePicker"
+                                [formControl]="$any(projectForm.controls['salesOrderDate'])">
+                            <mat-datepicker-toggle matIconSuffix [for]="salesOrderDatePicker"></mat-datepicker-toggle>
+                            <mat-datepicker #salesOrderDatePicker></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-lg-4">
+                        <label class="label d-block fw-medium mb-10">
+                            Totale Ordine
+                        </label>
+                        <mat-form-field>
+                            <i-feather name="edit-3"></i-feather>
+                            <mat-label>Enter project title</mat-label>
+                            <input matInput type="number"
+                                [formControl]="$any(projectForm.controls['salesOrderAmount'])">
+                        </mat-form-field>
+                    </div>
+
+                </div>
+                <mat-divider></mat-divider>
+                <br>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label class="label d-block fw-medium mb-10">
+                            Numero Fattura
+                        </label>
+                        <mat-form-field>
+                            <i-feather name="edit-3"></i-feather>
+                            <mat-label>Enter project title</mat-label>
+                            <input matInput [formControl]="$any(projectForm.controls['invoiceNumber'])">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-lg-4">
+                        <label class="label d-block fw-medium mb-10">
+                            Data Fattura
+                        </label>
+                        <mat-form-field>
+                            <i-feather name="calendar"></i-feather>
+                            <mat-label>Enter start date</mat-label>
+                            <input matInput [matDatepicker]="invoiceDatePicker"
+                                [formControl]="$any(projectForm.controls['invoiceDate'])">
+                            <mat-datepicker-toggle matIconSuffix [for]="invoiceDatePicker"></mat-datepicker-toggle>
+                            <mat-datepicker #invoiceDatePicker></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+
+                </div>
+            </div>
+
+            <div mat-dialog-actions class="mt-0">
+                <button mat-fab extended color="primary" color="primary" (click)="onSubmit()" [disabled]="projectForm.invalid">
                     Create Project
                 </button>
+                <button  mat-fab extended color="warn" (click)="onClose()" color="warn">
+                    Chiudi
+                </button>
+
             </div>
         </form>
     </mat-card-content>

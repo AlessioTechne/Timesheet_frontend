@@ -8,7 +8,6 @@ import localeIt from '@angular/common/locales/it';
 
 registerLocaleData(localeIt, 'it');
 
-
 @Component({
   selector: 'app-stats',
   standalone: true,
@@ -21,6 +20,8 @@ export class StatsComponent implements OnInit {
   @Input() project: ProjectsDto;
 
   constructor() {}
-
-  ngOnInit(): void {}
+  
+  ngOnInit(): void {
+    console.log('project', this.project);
+  }
 }

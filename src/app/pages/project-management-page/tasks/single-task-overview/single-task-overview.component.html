@@ -1,19 +1,54 @@
-<div class="row">
-    <div class="col-xxl-4">
+<div>
+    <div class="row">
+        <div class="col-xxl-8" *ngIf="project">
+            <mat-card class="trinta-card products-list-card mb-25 bg-white border-none d-block">
+                <mat-card-header>
+                    <mat-card-title>
+                        <h5 (click)="onTitleClick()" style="cursor: pointer">{{project.projectCode}} -
+                            {{project.projectName}}</h5>
+                        <h3>{{task.taskNumber}} - {{task.taskName}}</h3>
+                        <h6>{{task.notes}}</h6>
+                    </mat-card-title>
 
-        <!-- Profile -->
-        <app-task-info *ngIf="task" [task]="task"></app-task-info>
-    </div>
-   
-    <div class="col-xxl-4">
-        <app-task-order *ngIf="task" [task]="task"></app-task-order>
-    </div>
-    <div class="col-xxl-4">
-        <app-task-employees *ngIf="taskId" [taskId]="taskId" [projectId]="projectId"></app-task-employees>
-    </div>
-    <div class="col-xxl-4">
-        <app-task-invoices *ngIf="task" [task]="task"></app-task-invoices>
+                    <mat-card-subtitle>
+                        <button mat-mini-fab color="primary" style="display: right; margin-right:20px; "
+                            [routerLink]="['/home/project-management/taskEdit', projectId, taskId]">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                    </mat-card-subtitle>
+                </mat-card-header>
+            </mat-card>
+        </div>
+        <div class="col-xxl-2">
+            <mat-card class="trinta-card mb-25 bg-white border-none d-block">
 
+            </mat-card>
+        </div>
+        <div class="col-xxl-2">
+            <mat-card class="trinta-card mb-25 bg-white border-none d-block">
+
+            </mat-card>
+        </div>
     </div>
-    
+    <div class="row">
+        <div class="col-xxxl-8">
+            <div class="row">
+                <div class="col-lg-3 col-xl-4">
+                    <app-task-info *ngIf="task" [task]="task"></app-task-info>
+                </div>
+                <div class="col-lg-3 col-xl-4">
+                    <app-task-order *ngIf="task" [task]="task"></app-task-order>
+                </div>
+                <div class="col-lg-3 col-xl-4">
+                    <app-task-invoices *ngIf="task" [task]="task"></app-task-invoices>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-xxl-4">
+            <app-task-employees *ngIf="taskId" [taskId]="taskId" [projectId]="projectId"></app-task-employees>
+
+        </div>
+    </div>
 </div>

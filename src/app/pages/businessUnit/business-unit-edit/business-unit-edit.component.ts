@@ -88,7 +88,6 @@ export class BusinessUnitEditComponent implements OnInit {
     if (this.businessUnitId > 0) {
       this.businessUnitService.getBusinessUnit(this.businessUnitId).subscribe({
         next: (response) => {
-          console.log(response);
           this.businessUnit = response;
           this.businessUnitForm.patchValue({
             businessUnitName: response.businessUnitName,
@@ -124,10 +123,6 @@ export class BusinessUnitEditComponent implements OnInit {
               }
             );
           },
-          error: (e) => {
-            console.log(e);
-            this._snackBar.open(e.error, 'Chiudi');
-          },
         });
       } else {
         var businessUnitNewDto: BusinessUnitNewDto = {
@@ -148,10 +143,6 @@ export class BusinessUnitEditComponent implements OnInit {
                   duration: 3 * 1000,
                 }
               );
-            },
-            error: (e) => {
-              console.log(e);
-              this._snackBar.open(e.error, 'Chiudi');
             },
           });
       }
@@ -180,10 +171,7 @@ export class BusinessUnitEditComponent implements OnInit {
               }
             );
           },
-          error: (error) => {
-            console.log(error);
-            this._snackBar.open('Si è verificato un errore', 'Chiudi');
-          },
+         
         });
     }
   }

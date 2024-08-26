@@ -127,7 +127,6 @@ export class EmployeesManagementComponent implements OnInit {
               this.dataSource.sort = this.sort;
             }
           },
-          error: (error) => console.log(error),
         });
     }
   }
