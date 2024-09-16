@@ -15,7 +15,7 @@ export const AuthGuard: CanActivateFn = (route, state) => {
       if (user) return true;
       else {
         router.navigate(['/'], { queryParams: { returnUrl: state.url } });
-        snack.open('TU NON PUOI PASSARE!', 'Chiudi');
+        snack.open('Non hai i permessi per accedere!', 'Chiudi');
         return false;
       }
     })

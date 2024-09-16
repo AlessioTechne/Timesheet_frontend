@@ -3,6 +3,5 @@ export const environment = {
     apiUrl: '/Timesheet/api',
     authenticateUrl: '/Timesheet/api',
     domain: '',
-    appName: 'TR',
   }
   

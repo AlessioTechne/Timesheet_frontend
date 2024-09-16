@@ -160,3 +160,18 @@ export interface WorkPackageTypesDto {
   wpTypeId: string;
   wpTypeName: string;
 }
+
+export interface TaskLogsOverviewDto {
+  taskId: number;
+  taskLogId: number;
+  taskLogName: string;
+  taskLogNote: string;
+  taskLogDate: Date;
+  actualWorkInHours: number;
+  employeeName: string;
+
+}
+export interface TaskCloseDto {
+  taskId: number;
+  actualEndDate: Date;
+}

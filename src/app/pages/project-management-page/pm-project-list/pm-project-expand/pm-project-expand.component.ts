@@ -44,9 +44,9 @@ export class PmProjectExpandComponent implements OnInit {
     this.form = this.fb.group({
       projectLeader: [this.data.projectLeader],
       customerReference: [this.data.customerReference],
-      totEstimatedEffortInDays: [this.data.totEstimatedEffortInDays],
-      totTaskLoggedDays: [this.data.totTaskLoggedDays],
-      totNotBudgetedTaskLoggedDays: [this.data.totNotBudgetedTaskLoggedDays],
+      totEstimatedEffortInDays: [parseFloat(this.data.totEstimatedEffortInDays).toFixed(1)],
+      totTaskLoggedDays: [parseFloat(this.data.totTaskLoggedDays).toFixed(1)],
+      totNotBudgetedTaskLoggedDays: [parseFloat(this.data.totNotBudgetedTaskLoggedDays).toFixed(1)],
     });
   }
 }

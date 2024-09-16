@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MyProjectComponent } from './my-project/my-project.component';
+import { MyProjectComponent } from '../../timesheet/my-project/my-project.component';
 import { ToDoListComponent } from './to-do-list/to-do-list.component';
 
 @Component({

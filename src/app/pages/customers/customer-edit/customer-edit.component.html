@@ -13,28 +13,37 @@
     </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    <form [formGroup]="customerForm" class="form-container">
+    <form [formGroup]="customerForm" >
       <div class="row">
         <div class="col-sm-6">
+          <label class="label d-block fw-medium mb-10">
+            Sigla
+          </label>
           <mat-form-field>
             <i-feather name="icon"></i-feather>
-            <mat-label>Sigla</mat-label>
+            <mat-label>Inserire Sigla</mat-label>
             <input matInput [formControl]="$any(customerForm.controls['initials'])">
           </mat-form-field>
           <app-text-input [formControl]="$any(customerForm.controls['initials'])" [label]="'Sigla'"></app-text-input>
         </div>
         <div class="col-sm-6">
+          <label class="label d-block fw-medium mb-10">
+            Nome Cliente
+          </label>
           <mat-form-field>
             <i-feather name="user"></i-feather>
-            <mat-label>Nome Cliente</mat-label>
+            <mat-label>Inseire Nome Cliente</mat-label>
             <input matInput [formControl]="$any(customerForm.controls['customerName'])">
           </mat-form-field>
           <app-text-input [formControl]="$any(customerForm.controls['customerName'])" [label]="'Nome Cliente'" />
         </div>
         <div class="col-sm-6">
+          <label class="label d-block fw-medium mb-10">
+            P. Iva
+          </label>
           <mat-form-field>
             <i-feather name="document"></i-feather>
-            <mat-label>P. Iva</mat-label>
+            <mat-label>Inserire P. Iva</mat-label>
             <input matInput [formControl]="$any(customerForm.controls['vatId'])">
           </mat-form-field>
           <app-text-input [formControl]="$any(customerForm.controls['vatId'])" [label]="'P. Iva'" />
@@ -45,7 +54,7 @@
         <mat-icon>save</mat-icon> Salva
       </button>
       <button mat-fab extended color="warn" (click)="onCancel()">
-        <mat-icon>cancel</mat-icon> Annulla
+        <mat-icon>cancel</mat-icon>  Chiudi
       </button>
       <div class="label-group" *ngIf="customer">
 

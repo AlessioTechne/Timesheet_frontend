@@ -1,18 +1,24 @@
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import {
+  TaskCloseDto,
+  TaskDetailsDto,
+  TaskOverviewDto,
+} from '../../../../_models/projectTask';
 
 import { AttachmentsComponent } from '../../pm-project-details/attachments/attachments.component';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
-import { NavigationService } from '../../../../_services/navigation.service';
 import { ProjectManagementService } from '../../../../_services/project-management.service';
 import { ProjectsDto } from '../../../../_models/project';
-import { TaskDetailsDto } from '../../../../_models/projectTask';
+import { TaskCloseDialogComponent } from './task-close-dialog/task-close-dialog.component';
 import { TaskEmployeesComponent } from './task-employees/task-employees.component';
 import { TaskInfoComponent } from './task-info/task-info.component';
 import { TaskInvoicesComponent } from './task-invoices/task-invoices.component';
+import { TaskLogsComponent } from './task-logs/task-logs.component';
 import { TaskOrderComponent } from './task-order/task-order.component';
 import { TaskService } from '../../../../_services/task.service';
 
@@ -29,23 +35,26 @@ import { TaskService } from '../../../../_services/task.service';
     MatCardModule,
     MatIconModule,
     RouterLink,
-    MatButtonModule
+    MatButtonModule,
+    TaskLogsComponent,
   ],
   templateUrl: './single-task-overview.component.html',
   styleUrl: './single-task-overview.component.scss',
 })
 export class SingleTaskOverviewComponent implements OnInit {
   taskId: number;
-  task: TaskDetailsDto;
+  task: TaskDetailsDto | undefined;
+  taskOverview: TaskOverviewDto | undefined;
   projectId: number;
-  project: ProjectsDto;
+  project: ProjectsDto | undefined;
 
   constructor(
     private route: ActivatedRoute,
     private taskService: TaskService,
     private projectService: ProjectManagementService,
-    private navigationService: NavigationService,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog,
+
   ) {}
 
   ngOnInit(): void {
@@ -62,11 +71,38 @@ export class SingleTaskOverviewComponent implements OnInit {
         this.taskService.getTaskDetail(this.taskId).subscribe((task) => {
           this.task = task;
         });
+        this.taskService
+          .getTaskOverview(this.taskId)
+          .subscribe((taskOverview) => {
+            this.taskOverview = taskOverview;
+          });
       }
     });
   }
 
   onTitleClick() {
-    this.router.navigate([this.navigationService.getPreviousUrl()]);
+    this.router.navigate(['../../../detail/' + this.projectId], {
+      relativeTo: this.route,
+    });
+  }
+
+  closeTask() {
+    if (confirm('Sei sicuro di voler chiudere questo Task?')) {
+      
+      const dialogRef = this.dialog.open(TaskCloseDialogComponent, {});
+
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result) {
+          var closeTask: TaskCloseDto = ({
+            taskId: this.taskId,
+            actualEndDate: result.actualEndDate,
+          });
+
+          this.taskService.closeTask(closeTask).subscribe(() => {
+            this.router.navigate(['../../'], { relativeTo: this.route });
+          });
+        }
+      });
+    }
   }
 }

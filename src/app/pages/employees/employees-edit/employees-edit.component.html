@@ -17,36 +17,48 @@
           </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-        <form [formGroup]="employeesForm" class="form-container">
+        <form [formGroup]="employeesForm" >
             <div class="row">
                 <div class="col-sm-6">
+                    <label class="label d-block fw-medium mb-10">
+                        Cognome
+                    </label>
                     <mat-form-field>
                         <i-feather name="icon"></i-feather>
-                        <mat-label>Cognome</mat-label>
+                        <mat-label>Inserire Cognome</mat-label>
                         <input matInput [formControl]="$any(employeesForm.controls['surname'])">
                     </mat-form-field>
                     <app-text-input [formControl]="$any(employeesForm.controls['surname'])" [label]="'Cognome'"></app-text-input>
                 </div>
                 <div class="col-sm-6">
+                    <label class="label d-block fw-medium mb-10">
+                        Nome
+                    </label>
                     <mat-form-field>
                         <i-feather name="icon"></i-feather>
-                        <mat-label>Nome</mat-label>
+                        <mat-label>Inserire Nome</mat-label>
                         <input matInput [formControl]="$any(employeesForm.controls['firstName'])">
                     </mat-form-field>
                     <app-text-input [formControl]="$any(employeesForm.controls['firstName'])" [label]="'Nome'"></app-text-input>
                 </div>
                 <div class="col-sm-6">
+                    <label class="label d-block fw-medium mb-10">
+                        Account
+                    </label>
                     <mat-form-field>
                         <i-feather name="icon"></i-feather>
-                        <mat-label>Account</mat-label>
+                        <mat-label>Inserire Account</mat-label>
                         <input matInput [formControl]="$any(employeesForm.controls['account'])">
                     </mat-form-field>
                     <app-text-input [formControl]="$any(employeesForm.controls['account'])" [label]="'account'"></app-text-input>
                 </div>
                 <div class="col-sm-6">
+                    <label class="label d-block fw-medium mb-10">
+                        Matricola
+                    </label>
                     <mat-form-field>
                         <i-feather name="icon"></i-feather>
-                        <mat-label>Matricola</mat-label>
+                        <mat-label>Inserire Matricola</mat-label>
                         <input matInput [formControl]="$any(employeesForm.controls['employeeSN'])">
                     </mat-form-field>
                     <app-text-input [formControl]="$any(employeesForm.controls['employeeSN'])" [label]="'employeeSM'"></app-text-input>
@@ -57,7 +69,7 @@
                 <mat-icon>save</mat-icon> Salva
             </button>
             <button mat-fab extended color="warn" (click)="onCancel()">
-                <mat-icon>cancel</mat-icon> Annulla
+                <mat-icon>cancel</mat-icon>  Chiudi
             </button>
             <div class="label-group" *ngIf="employees">
 

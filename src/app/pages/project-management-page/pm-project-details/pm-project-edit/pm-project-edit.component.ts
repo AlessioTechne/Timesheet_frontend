@@ -33,7 +33,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { NavigationService } from '../../../../_services/navigation.service';
 import { NgxEditorModule } from 'ngx-editor';
 import { ProjectManagementService } from '../../../../_services/project-management.service';
-import { T } from '@angular/cdk/keycodes';
+import { forkJoin } from 'rxjs';
 import localeIt from '@angular/common/locales/it';
 
 registerLocaleData(localeIt, 'it');
@@ -68,6 +68,7 @@ export class PmProjectEditComponent implements OnInit {
   projectForm: FormGroup;
   projectId: number;
   titlePage: string;
+  buttonText: string = 'Salva';
 
   businessUnits: BusinessUnitDto[] = [];
   filteredBusinessUnits: BusinessUnitDto[] = [];
@@ -97,12 +98,21 @@ export class PmProjectEditComponent implements OnInit {
     });
 
     this.initializeForm();
+    
+    forkJoin([
+      this.businessUnitsServices.getAllBusinessUnits(),
+      this.customerServices.getAllCustomers(),
+      this.employeesServices.getAllEmployees()
+    ]).subscribe(([businessUnits, customers, employees]) => {
+      this.businessUnits = businessUnits;
+      this.filteredBusinessUnits = businessUnits;
+      this.customer = customers;
+      this.filteredCustomer = customers;
+      this.employees = employees;
+      this.filteredEmployees = employees;
 
-    this.laodBusinessUnits();
-    this.loadCustomers();
-    this.loadEmployees();
-
-    this.loadProject();
+      this.loadProject();
+    });
   }
 
   loadProject() {
@@ -133,9 +143,11 @@ export class PmProjectEditComponent implements OnInit {
           invoiceDate: data.invoiceDate,
         });
         this.titlePage = 'Modifica progetto "' + data.projectName + '"';
+        this.buttonText = 'Aggiorna';
       });
     } else {
       this.titlePage = 'Nuovo Progetto';
+      this.buttonText = 'Crea Progetto';
     }
   }
 
@@ -177,10 +189,10 @@ export class PmProjectEditComponent implements OnInit {
     this.projectForm = this.fb.group({
       projectName: ['', Validators.required],
       projectCode: ['', Validators.required],
-      estimatedEffortInDays: ['', Validators.required],
+      estimatedEffortInDays: [''],
       //approved: [''],
       notes: [''],
-      dueDate: ['', Validators.required],
+      dueDate: [''],
       customer: ['', Validators.required],
       businessUnit: ['', Validators.required],
       employees: ['', Validators.required],

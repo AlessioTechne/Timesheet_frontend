@@ -3,7 +3,7 @@
         <mat-card class="trinta-card pm-stat-card mb-25 bg-white border-none d-block text-center">
             <mat-card-content>
                 <span class="d-block text-gray">
-                    Status
+                    Stato
                 </span>
                 <h5>
                     {{project.statusName}}
@@ -16,10 +16,10 @@
         <mat-card class="trinta-card pm-stat-card mb-25 bg-white border-none d-block text-center">
             <mat-card-content>
                 <span class="d-block text-gray">
-                    Prev/cons
+                    Prev/Cons
                 </span>
-                <h5 *ngIf="project.totEstimatedEffortInDays && project.totNotBudgetedTaskLoggedDays; else elseBlock">
-                    {{((project.totEstimatedEffortInDays/project.totNotBudgetedTaskLoggedDays)*100).toFixed(1)}}%
+                <h5 *ngIf="project.totEstimatedEffortInDays && project.totTaskLoggedDays; else elseBlock">
+                    {{((project.totTaskLoggedDays/project.totEstimatedEffortInDays)*100).toFixed(2)}}%
                 </h5>
                 <ng-template #elseBlock>
                     <h5>n/a</h5>
@@ -33,7 +33,7 @@
         <mat-card class="trinta-card pm-stat-card mb-25 bg-white border-none d-block text-center">
             <mat-card-content>
                 <span class="d-block text-gray">
-                    gg/u extra prev
+                    GG/u Extra Prev
                 </span>
                 <h5>
                     {{project.totNotBudgetedTaskLoggedDays?.toFixed(1)}}
@@ -42,7 +42,7 @@
             </mat-card-content>
         </mat-card>
     </div>
-    <div class="col-xxxl-12 col-sm-6 col-md-4">
+    <div class="col-xxxl-12 col-sm-12 col-md-12">
         <mat-card class="trinta-card pm-stat-card mb-25 bg-white border-none d-block text-center">
             <span class="d-block text-gray">
                 Business Unit

@@ -35,7 +35,7 @@
                             <li class="sidemenu-item">
                                 <a routerLink="/home/employees" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
                                     class="sidemenu-link">
-                                    Utenti
+                                    Impiegati
                                 </a>
                             </li>
                             <li class="sidemenu-item">
@@ -62,6 +62,12 @@
                                     Lista Progetti
                                 </a>
                             </li>
+                            <li class="sidemenu-item">
+                                <a routerLink="/home/timesheet" routerLinkActive="active"
+                                    [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                    Timesheet
+                                </a>
+                            </li>
                         </ul>
                     </mat-expansion-panel>
                     <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = true">
@@ -77,8 +83,20 @@
                             <li class="sidemenu-item">
                                 <a routerLink="/home/settings" routerLinkActive="active"
                                     [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
-                                    Admin Panel
+                                    Gestione Account
                                 </a>
+                                <!--a routerLink="/icon" routerLinkActive="active"
+                                    [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                    Icons
+                                </a>
+                                <a routerLink="/maticon" routerLinkActive="active"
+                                    [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                    Icons
+                                </a>
+                                <a routerLink="/remicon" routerLinkActive="active"
+                                    [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                    Icons
+                                </a-->
                             </li>
                         </ul>
                     </mat-expansion-panel>

@@ -23,7 +23,7 @@ import { AuthService } from './_services/auth.service';
 import { User } from './_models/user';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { LoadingService } from './_services/loading.service';
-import { MatCard, MatCardModule } from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
 import { NavigationService } from './_services/navigation.service';
 
 @Component({
@@ -53,11 +53,12 @@ export class AppComponent implements AfterContentChecked {
   title = 'Timesheet';
   routerSubscription: any;
   location: any;
+  isMenuVisible = this.authServices.currentUser$;
 
   constructor(
     public router: Router,
     public toggleService: ToggleService,
-    private authServices: AuthService,
+    public authServices: AuthService,
     public loadingService: LoadingService,
     private changeDetector: ChangeDetectorRef,
     private navigationService: NavigationService,

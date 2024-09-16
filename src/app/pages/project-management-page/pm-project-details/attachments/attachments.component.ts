@@ -49,7 +49,7 @@ export class AttachmentsComponent implements OnInit {
 
   attachmentsParams: AttachmentParams | undefined;
 
-  displayedColumns = ['attachmentName', 'actions'];
+  displayedColumns = ['attachmentDescription', 'attachmentName', 'actions'];
 
   constructor(
     public dialog: MatDialog,
@@ -71,8 +71,9 @@ export class AttachmentsComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (!result) return;
       const formData = new FormData();
-      formData.append('file', result.data[1]);
+      formData.append('file', result.data[2]);
       formData.append('attachmentName', result.data[0]);
+      formData.append('attachmentDescription', result.data[1]);
       formData.append('projectId', this.projectId.toString());
 
       this.projectServices.newAttachment(formData).subscribe({
@@ -140,17 +141,17 @@ export class AttachmentsComponent implements OnInit {
     this.projectServices.getAttachmentfile(id).subscribe({
       next: (response) => {
         if (response.body !== null) {
-        const blob = new Blob([response.body], { type: 'application/pdf' });
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        var attach =this.attachments.find((x) => x.attachmentId === id);
-        if(attach)
-          a.download = attach.attachmentName;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        window.URL.revokeObjectURL(url);}
+          const blob = new Blob([response.body], { type: 'application/pdf' });
+          const url = window.URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          var attach = this.attachments.find((x) => x.attachmentId === id);
+          if (attach) a.download = attach.attachmentName;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          window.URL.revokeObjectURL(url);
+        }
       },
     });
   }

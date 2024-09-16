@@ -18,6 +18,15 @@
                     <input matInput formControlName="customerName">
                 </mat-form-field>
 
+                <!--mat-form-field class="search">
+                    <i-feather name="search"></i-feather>
+                    <mat-label>Status</mat-label>
+                    <mat-select formControlName="statusId">
+                        <mat-option *ngFor="let option of projectStatusDto"
+                            [value]="option.statusId">{{option.statusName }} </mat-option>
+                    </mat-select> 
+                </mat-form-field-->
+
                 <button mat-icon-button (click)="resetFilters()"> <mat-icon>restore_from_trash</mat-icon></button>
 
             </div>
@@ -42,8 +51,8 @@
                         <th mat-header-cell *matHeaderCellDef mat-sort-header>
                             Progetto
                         </th>
-                        <td mat-cell *matCellDef="let element" class="project-name-cell">
-                            <h6 class="mt-0">
+                        <td mat-cell *matCellDef="let element">
+                            <h6 class="mt-0 flex-wrap">
                                 <a [routerLink]="['/home/project-management/detail', element.projectId]">
                                     {{element.projectName}}
                                 </a>
@@ -59,7 +68,7 @@
                         <td mat-cell *matCellDef="let element">
                             <span class="d-block text-black">
                                 {{element.numCompletedTasks}}/{{element.totNumTasks}}
-                                {{((element.numCompletedTasks/element.totNumTasks)*100).toFixed(2) }}%
+                                {{((element.numCompletedTasks/element.totNumTasks)*100).toFixed(1) }}%
                             </span>
                             <mat-progress-bar mode="determinate"
                                 value="{{(element.numCompletedTasks/element.totNumTasks)*100}}"></mat-progress-bar>

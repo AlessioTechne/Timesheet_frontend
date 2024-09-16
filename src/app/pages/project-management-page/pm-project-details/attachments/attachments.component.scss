@@ -73,10 +73,10 @@
                 }
                 .mat-mdc-cell {
                     border: none;
-                    overflow: hidden;
+                    overflow: unset;
                     text-align: start;
                     padding: 24px 15px;
-                    white-space: nowrap;
+                    white-space: wrap;
                     line-height: initial;
                     letter-spacing: 0.14px;
                     background: transparent;

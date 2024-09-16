@@ -9,7 +9,11 @@ import {
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { ProjectParams, ProjectsDto } from '../../../../_models/project';
+import {
+  ProjectParams,
+  ProjectStatusDto,
+  ProjectsDto,
+} from '../../../../_models/project';
 import {
   animate,
   state,
@@ -24,7 +28,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIcon } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatOptionModule } from '@angular/material/core';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSelectModule } from '@angular/material/select';
 import { Pagination } from '../../../../_models/pagination';
 import { PmProjectExpandComponent } from '../pm-project-expand/pm-project-expand.component';
 import { ProjectManagementService } from '../../../../_services/project-management.service';
@@ -51,7 +57,9 @@ registerLocaleData(localeIt, 'it');
     FeatherModule,
     FormsModule,
     ReactiveFormsModule,
-    PmProjectExpandComponent
+    PmProjectExpandComponent,
+    MatOptionModule,
+    MatSelectModule,
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'it' }],
   animations: [
@@ -68,11 +76,11 @@ registerLocaleData(localeIt, 'it');
   styleUrl: './pm-project-view.component.scss',
 })
 export class PmProjectViewComponent implements OnInit {
- 
   @Input() status = '';
   projectParams: ProjectParams | undefined;
   pagination: Pagination | undefined;
   project: ProjectsDto[];
+  projectStatusDto: ProjectStatusDto[];
   dataSource: MatTableDataSource<ProjectsDto, MatPaginator>;
   filtersForm: FormGroup;
   expandedElement: ProjectsDto | null;
@@ -107,22 +115,22 @@ export class PmProjectViewComponent implements OnInit {
   ) {
     this.projectParams = this.projectServices.getProjectParams();
   }
-  
+
   ngOnInit(): void {
     this.initializeFilterForms();
     if (this.projectParams) {
       this.projectParams.statusId = this.status;
     }
     this.loadProject();
+    //this.getStatus();
   }
-
-  
 
   initializeFilterForms() {
     this.filtersForm = this.fb.group({
       projectCode: [this.projectParams?.projectCode],
       projectName: [this.projectParams?.projectName],
       customerName: [this.projectParams?.customerName],
+      //statusId: [this.projectParams?.statusId],
     });
   }
 
@@ -144,9 +152,8 @@ export class PmProjectViewComponent implements OnInit {
           values.projectCode === null ? '' : values.projectCode;
         this.projectParams.customerName =
           values.customerName === null ? '' : values.customerName;
-        
-
-        this.projectServices.setProjectParams(this.projectParams);
+        //this.projectParams.statusId =
+        //values.statusId === null ? '' : values.statusId;
         this.loadProject();
       }
     });
@@ -155,7 +162,6 @@ export class PmProjectViewComponent implements OnInit {
   loadProject() {
     if (this.projectParams) {
       this.projectParams.statusId = this.status;
-      this.projectServices.setProjectParams(this.projectParams);
       this.projectServices.paginatedProject(this.projectParams).subscribe({
         next: (response) => {
           if (response.result && response.pagination) {
@@ -169,11 +175,20 @@ export class PmProjectViewComponent implements OnInit {
     }
   }
 
+  getStatus() {
+    this.projectServices.getProjectStatus().subscribe({
+      next: (response) => {
+        if (response) {
+          this.projectStatusDto = response;
+        }
+      },
+    });
+  }
+
   pageChanged(event: any) {
     if (this.projectParams && this.projectParams?.pageNumber !== event.page) {
       this.projectParams.pageNumber = event.pageIndex;
       this.projectParams.pageSize = event.pageSize;
-      this.projectServices.setProjectParams(this.projectParams);
       this.loadProject();
     }
   }

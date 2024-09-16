@@ -7,15 +7,15 @@
         </mat-card-title>
     </mat-card-header>
     <mat-card-content>
-        <form [formGroup]="projectForm" class="form-container">
+        <form [formGroup]="projectForm" >
             <div class="row">
                 <div class="col-lg-6">
                     <label class="label d-block fw-medium mb-10">
-                        Project Name
+                        Nome Progetto
                     </label>
                     <mat-form-field>
                         <i-feather name="edit-3"></i-feather>
-                        <mat-label>Enter project title</mat-label>
+                        <mat-label>Inserire Nome Progetto</mat-label>
                         <input matInput [formControl]="$any(projectForm.controls['projectName'])">
                     </mat-form-field>
                 </div>
@@ -33,11 +33,11 @@
 
                 <div class="col-sm-4">
                     <label class="label d-block fw-medium mb-10">
-                        Estimated effort
+                        Tempo Stimato in Giorni
                     </label>
                     <mat-form-field>
                         <i-feather name="dollar-sign"></i-feather>
-                        <mat-label>Inserire Codice Progetto</mat-label>
+                        <mat-label>Inserire Tempo Stimato In Giorni</mat-label>
                         <input matInput type="number"
                             [formControl]="$any(projectForm.controls['estimatedEffortInDays'])">
                     </mat-form-field>
@@ -49,7 +49,7 @@
                     </label>
                     <mat-form-field>
                         <i-feather name="calendar"></i-feather>
-                        <mat-label>Enter start date</mat-label>
+                        <mat-label>Inserire Data di Scadenza</mat-label>
                         <input matInput [matDatepicker]="picker" [formControl]="$any(projectForm.controls['dueDate'])">
                         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
@@ -58,13 +58,13 @@
 
                 <div class="col-sm-4">
                     <label class="label d-block fw-medium mb-10">
-                        employee
+                        Project Leader
                     </label>
                     <mat-form-field>
                         <i-feather name="map"></i-feather>
-                        <mat-label>employee</mat-label>
-                        <input type="text" placeholder="Pick one" matInput
-                            [formControl]="$any(projectForm.controls['employees'])" [matAutocomplete]="autoEmployees">
+                        <mat-label>Inserire Project Leader</mat-label>
+                        <input type="text" matInput [formControl]="$any(projectForm.controls['employees'])"
+                            [matAutocomplete]="autoEmployees">
                         <mat-autocomplete #autoEmployees="matAutocomplete" [displayWith]="employeesVal()">
                             <mat-option *ngFor="let option of filteredEmployees" [value]="option">{{option.surname}}
                                 {{option.firstName}}</mat-option>
@@ -78,9 +78,9 @@
                     </label>
                     <mat-form-field>
                         <i-feather name="map"></i-feather>
-                        <mat-label>Cliente</mat-label>
-                        <input type="text" placeholder="Pick one" matInput
-                            [formControl]="$any(projectForm.controls['customer'])" [matAutocomplete]="autoCustomer">
+                        <mat-label>Inserire Cliente</mat-label>
+                        <input type="text" matInput [formControl]="$any(projectForm.controls['customer'])"
+                            [matAutocomplete]="autoCustomer">
                         <mat-autocomplete #autoCustomer="matAutocomplete" [displayWith]="customerVal()">
                             <mat-option *ngFor="let option of filteredCustomer"
                                 [value]="option">{{option.customerName}}</mat-option>
@@ -94,9 +94,8 @@
                     </label>
                     <mat-form-field>
                         <i-feather name="list"></i-feather>
-                        <mat-label>Business Unit</mat-label>
-                        <input type="text" placeholder="Pick one" matInput
-                            [formControl]="$any(projectForm.controls['businessUnit'])"
+                        <mat-label>Inserire Business Unit</mat-label>
+                        <input type="text" matInput [formControl]="$any(projectForm.controls['businessUnit'])"
                             [matAutocomplete]="autoBusinessUnit">
                         <mat-autocomplete #autoBusinessUnit="matAutocomplete" [displayWith]="businessUnitsVal()">
                             <mat-option *ngFor="let option of filteredBusinessUnits"
@@ -112,9 +111,8 @@
                     </label>
                     <mat-form-field class="textarea">
                         <i-feather name="file-text"></i-feather>
-                        <mat-label>Note</mat-label>
-                        <textarea matInput [formControl]="$any(projectForm.controls['notes'])"
-                            placeholder="Ex. It makes me feel..."></textarea>
+                        <mat-label>Inserire Note</mat-label>
+                        <textarea matInput [formControl]="$any(projectForm.controls['notes'])"></textarea>
                     </mat-form-field>
                 </div>
 
@@ -130,7 +128,7 @@
                         </label>
                         <mat-form-field>
                             <i-feather name="edit-3"></i-feather>
-                            <mat-label>Enter project title</mat-label>
+                            <mat-label>Inserire Numero Preventivo</mat-label>
                             <input matInput [formControl]="$any(projectForm.controls['quoteNumber'])">
                         </mat-form-field>
                     </div>
@@ -140,7 +138,7 @@
                         </label>
                         <mat-form-field>
                             <i-feather name="calendar"></i-feather>
-                            <mat-label>Enter start date</mat-label>
+                            <mat-label>Inserire Data Preventivo</mat-label>
                             <input matInput [matDatepicker]="quoteDatePicker"
                                 [formControl]="$any(projectForm.controls['quoteDate'])">
                             <mat-datepicker-toggle matIconSuffix [for]="quoteDatePicker"></mat-datepicker-toggle>
@@ -153,7 +151,7 @@
                         </label>
                         <mat-form-field>
                             <i-feather name="edit-3"></i-feather>
-                            <mat-label>Enter project title</mat-label>
+                            <mat-label>Inserire Totale Preventivo</mat-label>
                             <input matInput type="number" [formControl]="$any(projectForm.controls['quoteAmount'])">
                         </mat-form-field>
                     </div>
@@ -167,7 +165,7 @@
                         </label>
                         <mat-form-field>
                             <i-feather name="edit-3"></i-feather>
-                            <mat-label>Enter project title</mat-label>
+                            <mat-label>Inserire Numero Ordine</mat-label>
                             <input matInput [formControl]="$any(projectForm.controls['salesOrderNumber'])">
                         </mat-form-field>
                     </div>
@@ -177,7 +175,7 @@
                         </label>
                         <mat-form-field>
                             <i-feather name="calendar"></i-feather>
-                            <mat-label>Enter start date</mat-label>
+                            <mat-label>Inserire Data Ordine</mat-label>
                             <input matInput [matDatepicker]="salesOrderDatePicker"
                                 [formControl]="$any(projectForm.controls['salesOrderDate'])">
                             <mat-datepicker-toggle matIconSuffix [for]="salesOrderDatePicker"></mat-datepicker-toggle>
@@ -190,7 +188,7 @@
                         </label>
                         <mat-form-field>
                             <i-feather name="edit-3"></i-feather>
-                            <mat-label>Enter project title</mat-label>
+                            <mat-label>Inserire Totale Ordine</mat-label>
                             <input matInput type="number"
                                 [formControl]="$any(projectForm.controls['salesOrderAmount'])">
                         </mat-form-field>
@@ -206,7 +204,7 @@
                         </label>
                         <mat-form-field>
                             <i-feather name="edit-3"></i-feather>
-                            <mat-label>Enter project title</mat-label>
+                            <mat-label>Inserire Numero Fattura</mat-label>
                             <input matInput [formControl]="$any(projectForm.controls['invoiceNumber'])">
                         </mat-form-field>
                     </div>
@@ -216,7 +214,7 @@
                         </label>
                         <mat-form-field>
                             <i-feather name="calendar"></i-feather>
-                            <mat-label>Enter start date</mat-label>
+                            <mat-label>Inserire Data Fattura</mat-label>
                             <input matInput [matDatepicker]="invoiceDatePicker"
                                 [formControl]="$any(projectForm.controls['invoiceDate'])">
                             <mat-datepicker-toggle matIconSuffix [for]="invoiceDatePicker"></mat-datepicker-toggle>
@@ -228,10 +226,11 @@
             </div>
 
             <div mat-dialog-actions class="mt-0">
-                <button mat-fab extended color="primary" color="primary" (click)="onSubmit()" [disabled]="projectForm.invalid">
-                    Create Project
+                <button mat-fab extended color="primary" color="primary" (click)="onSubmit()"
+                    [disabled]="projectForm.invalid">
+                    {{buttonText}}
                 </button>
-                <button  mat-fab extended color="warn" (click)="onClose()" color="warn">
+                <button mat-fab extended color="warn" (click)="onClose()" color="warn">
                     Chiudi
                 </button>
 

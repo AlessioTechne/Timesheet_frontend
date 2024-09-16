@@ -12,7 +12,7 @@ export interface Pagination {
   export class PaginationParams {
     pageNumber = 0;
     pageSize = 10;
-    orderBy = 'defalut';
+    orderBy = 'default';
     orderDirection = '';
   }
   

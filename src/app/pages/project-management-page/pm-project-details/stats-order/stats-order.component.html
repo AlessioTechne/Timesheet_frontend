@@ -5,21 +5,21 @@
                 <span class="d-block text-gray">
                     Numero Preventivo
                 </span>
-                <h5>
+                <p class="text-black">
                     {{projectStats.quoteNumber? projectStats.quoteNumber : '--'}}
-                </h5>
+                </p>
                 <span class="d-block text-gray">
                     Data Preventivo
                 </span>
-                <h5>
+                <p class="text-black">
                     {{projectStats.quoteDate? (projectStats.quoteDate | date:'dd MMM yyyy') : '--/--/----'}}
-                </h5>
+                </p>
                 <span class="d-block text-gray">
                     Totale Preventivo
                 </span>
-                <h5>
+                <p class="text-black">
                     {{projectStats.quoteAmount? projectStats.quoteAmount : '--'}}
-                </h5>
+                </p>
 
             </mat-card-content>
         </mat-card>
@@ -31,21 +31,21 @@
                 <span class="d-block text-gray">
                     Numero Ordine
                 </span>
-                <h5>
+                <p class="text-black">
                     {{projectStats.salesOrderNumber? projectStats.salesOrderNumber : '--'}}
-                </h5>
+                </p>
                 <span class="d-block text-gray">
                     Data Ordine
                 </span>
-                <h5>
+                <p class="text-black">
                     {{projectStats.salesOrderDate? (projectStats.salesOrderDate | date:'dd MMM yyyy') : '--/--/----'}}
-                </h5>
+                </p>
                 <span class="d-block text-gray">
                     Totale Ordine
                 </span>
-                <h5>
+                <p class="text-black">
                     {{projectStats.salesOrderAmount ? projectStats.salesOrderAmount : '--'}}
-                </h5>
+                </p>
 
             </mat-card-content>
         </mat-card>
@@ -57,18 +57,18 @@
                 <span class="d-block text-gray">
                     Numero Fattura
                 </span>
-                <h5>
+                <p class="text-black">
                     {{projectStats.invoiceNumber? projectStats.invoiceNumber : '--'}}
-                </h5>
+                </p>
 
             </mat-card-content>
             <mat-card-content>
                 <span class="d-block text-gray">
                     Data Fattura
                 </span>
-                <h5>
+                <p class="text-black">
                     {{projectStats.invoiceDate? (projectStats.invoiceDate | date:'dd MMM yyyy') : '--/--/----'}}
-                </h5>
+                </p>
 
             </mat-card-content>
 

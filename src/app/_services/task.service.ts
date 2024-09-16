@@ -3,9 +3,11 @@ import {
   ProjectMembersOverviewDto,
   ProjectMembersParams,
   ProjectTeamMatrixDto,
+  TaskCloseDto,
   TaskDetailsDto,
   TaskEditDto,
   TaskEmployeesDto,
+  TaskLogsOverviewDto,
   TaskMemberParams,
   TaskMembersDto,
   TaskNewDto,
@@ -14,8 +16,15 @@ import {
   TasksDto,
   WorkPackageTypesDto,
 } from '../_models/projectTask';
+import {
+  TaskLogAddDto,
+  TaskLogsDto,
+  TaskLogsEditDto,
+  TaskTimesheetDto,
+} from '../_models/project';
 import { getPaginatedResult, getPaginationheaders } from './paginationHelper';
 
+import { EmployeesDto } from '../_models/employees';
 import { HttpClient } from '@angular/common/http';
 import { Task } from '../ui-elements/checkbox/checkbox.component';
 import { environment } from '../environments/environments';
@@ -25,6 +34,7 @@ import { map } from 'rxjs';
   providedIn: 'root',
 })
 export class TaskService implements OnInit {
+
   baseUrl = environment.apiUrl + 'task/';
   taskParams: TaskParams;
   projectMembersParams: ProjectMembersParams;
@@ -69,8 +79,10 @@ export class TaskService implements OnInit {
   getTaskDetail(id: number) {
     return this.http.get<TaskDetailsDto>(this.baseUrl + 'taskDetails/' + id);
   }
-  getTaskOverview(id: number) {
-    return this.http.get<TaskOverviewDto>(this.baseUrl + 'task/' + id);
+  getTaskOverview(taskId: number) {
+    return this.http.get<TaskOverviewDto>(
+      this.baseUrl + 'taskOverview/' + taskId
+    );
   }
 
   getTaskParams() {
@@ -83,6 +95,22 @@ export class TaskService implements OnInit {
 
   getTaskMembersParams() {
     return this.taskMemberParams;
+  }
+
+  getTimeSheetTask(taskId: number) {
+    return this.http.get<TaskTimesheetDto[]>(
+      this.baseUrl + 'taskTimesheet/' + taskId
+    );
+  }
+
+  getAssignedEmployees(taskId: number) {
+    return this.http.get<EmployeesDto[]>(this.baseUrl + 'assignedEmployees/' + taskId);
+  }
+
+  getAllTaskLogs(taskId: number) {
+    return this.http.get<TaskLogsOverviewDto[]>(
+      this.baseUrl + 'allTaskLogss/' + taskId
+    );
   }
 
   paginatedProjectMembers(projectMembersParams: ProjectMembersParams) {
@@ -131,6 +159,10 @@ export class TaskService implements OnInit {
     return this.http.put(this.baseUrl, taskEditDto);
   }
 
+  closeTask(task: TaskCloseDto) {
+    return this.http.put(this.baseUrl + 'closeTask/', task);
+  }
+
   getProjectTeamMatrix(projectId: number, taskId: number) {
     return this.http.get<ProjectTeamMatrixDto>(
       this.baseUrl + 'employees/' + projectId + '/' + taskId
@@ -147,5 +179,29 @@ export class TaskService implements OnInit {
 
   getWPTypes() {
     return this.http.get<WorkPackageTypesDto[]>(this.baseUrl + 'wptype');
+  }
+
+  deleteTask(taskId: number) {
+    return this.http.delete(this.baseUrl + taskId);
+  }
+
+  getTaskLogs(date: string) {
+    return this.http.get<TaskLogsDto[]>(this.baseUrl + 'taskLogs/' + date);
+  }
+
+  saveTaskLogs(taskLogs: TaskLogsEditDto[]) {
+    return this.http.post(this.baseUrl + 'taskLogs', taskLogs);
+  }
+
+  addTaskLog(taskLog: TaskLogAddDto) {
+    return this.http.post(this.baseUrl + 'taskLogAdd', taskLog);
+  }
+
+  deleteTaskLog(taskLogId: number) {
+    return this.http.delete(this.baseUrl + 'taskLogs/' + taskLogId);
+  }
+
+  updateTaskLog(data: TaskLogsEditDto) {
+    return this.http.put(this.baseUrl + 'taskLogs', data);
   }
 }

@@ -1,6 +1,7 @@
 import { CommonModule, registerLocaleData } from '@angular/common';
 import { Component, Input, LOCALE_ID, OnInit } from '@angular/core';
 
+import { C } from '@angular/cdk/keycodes';
 import { MatCardModule } from '@angular/material/card';
 import { ProjectsDto } from '../../../../_models/project';
 import { RouterLink } from '@angular/router';
@@ -11,7 +12,7 @@ registerLocaleData(localeIt, 'it');
 @Component({
   selector: 'app-stats',
   standalone: true,
-  imports: [RouterLink, MatCardModule,CommonModule],
+  imports: [RouterLink, MatCardModule, CommonModule],
   providers: [{ provide: LOCALE_ID, useValue: 'it' }],
   templateUrl: './stats.component.html',
   styleUrl: './stats.component.scss',
@@ -20,8 +21,6 @@ export class StatsComponent implements OnInit {
   @Input() project: ProjectsDto;
 
   constructor() {}
-  
-  ngOnInit(): void {
-    console.log('project', this.project);
-  }
+
+  ngOnInit(): void {}
 }

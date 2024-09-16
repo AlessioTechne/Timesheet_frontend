@@ -47,7 +47,6 @@ export class PmProjectDetailsComponent implements OnInit {
   loadProject() {
     this.projectServices.getProject(this.projectId).subscribe({
       next: (response) => {
-        console.log(response);  
         this.projectDto = response;
       },
     

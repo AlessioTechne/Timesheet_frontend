@@ -88,6 +88,12 @@ export class EmployeesService {
     );
   }
 
+  getTimetable(id: number) {
+    return this.http.get<EmployeeTimetablesDto>(
+      this.baseUrl + 'timetable/day/' + id
+    );
+  }
+
   updateTimetable(employeeTimetablesUpdateDto: EmployeeTimetablesUpdateDto) {
     return this.http.put(
       this.baseUrl + 'timetable',

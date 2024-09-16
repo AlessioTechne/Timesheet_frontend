@@ -5,20 +5,17 @@
                 Task Info
             </h5>
         </mat-card-title>
-        <mat-card-subtitle>
-
-        </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
         <mat-list>
 
             <mat-list-item>
-                <label mat-line>start date</label>
-                <p mat-line>{{task.actualStartDate | date: 'dd/MM/yyyy'}}</p>
+                <label mat-line>Data Inizio</label>
+                <p class="text-black">{{task.actualStartDate? (task.actualEndDate | date: 'dd/MM/yyyy') : '--/--/----'}}</p>
             </mat-list-item>
             <mat-list-item>
-                <label mat-line>end date</label>
-                <p mat-line>{{task.actualEndDate? (task.actualEndDate | date: 'dd/MM/yyyy') : '--/--/----'}}</p>
+                <label mat-line>Data Fine</label>
+                <p class="text-black">{{task.actualEndDate? (task.actualEndDate | date: 'dd/MM/yyyy') : '--/--/----'}}</p>
             </mat-list-item>
 
         </mat-list>

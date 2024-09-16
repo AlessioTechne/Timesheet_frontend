@@ -4,29 +4,38 @@
 <mat-card class="trinta-card mb-25 bg-white border-none d-block">
     <mat-card-content>
 
-<form [formGroup]="form" class="form-container">
-<div mat-dialog-content>    
-    <mat-form-field class="mb-20">
-        <mat-label>Nome File</mat-label>
-        <i-feather name="edit-3"></i-feather>
-        <input matInput formControlName="attachName" >
-    </mat-form-field>
-</div>
+        <form [formGroup]="form" >
+            <div mat-dialog-content>
+                <label>Nome File</label>
+                <mat-form-field class="mb-20">
+                    <i-feather name="file"></i-feather>
+                    <input matInput formControlName="attachName" readonly>
+                </mat-form-field>
+            </div>
+            <div mat-dialog-content>
+                <label>Nome Allegato</label>
+                <mat-form-field class="mb-20">
+                    <mat-label>Inserisci Nome Allegato</mat-label>
+                    <i-feather name="edit-3"></i-feather>
+                    <input matInput formControlName="attachDescription">
+                </mat-form-field>
+            </div>
 
-    <file-upload class="file-uploader" [multiple]="multiple" formControlName="fileUpload"></file-upload>
+            <file-upload class="file-uploader" [multiple]="multiple" formControlName="fileUpload"></file-upload>
 
 
-</form>
-</mat-card-content>
+        </form>
+    </mat-card-content>
 
 
 
-<div mat-dialog-actions class="mt-0">
-    <button mat-flat-button color="primary" [disabled]="!form.valid" [mat-dialog-close]="true" (click)="onSave()" cdkFocusInitial>
-        Salva
-    </button>
-    <button mat-flat-button color="warn" (click)="onClose()" mat-dialog-close>
-        Annulla
-    </button>
-</div>
+    <div mat-dialog-actions class="mt-0">
+        <button mat-flat-button color="primary" [disabled]="!form.valid" [mat-dialog-close]="true" (click)="onSave()"
+            cdkFocusInitial>
+            Salva
+        </button>
+        <button mat-flat-button color="warn" (click)="onClose()" mat-dialog-close>
+             Chiudi
+        </button>
+    </div>
 </mat-card>

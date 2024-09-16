@@ -4,10 +4,13 @@ import {
 } from '../_models/projectTask';
 import {
   ProjectEditDto,
+  ProjectMembersTimesheetDto,
   ProjectNewDto,
   ProjectParams,
   ProjectStatsOrderDto,
+  ProjectStatusDto,
   ProjectsDto,
+  TaskLogsDto,
 } from '../_models/project';
 import { getPaginatedResult, getPaginationheaders } from './paginationHelper';
 
@@ -59,6 +62,10 @@ export class ProjectManagementService {
   }
 
   getProjectParams() {
+    return this.projectParams;
+  }
+
+  getMyProjectParams() {
     return this.projectParams;
   }
 
@@ -138,5 +145,37 @@ export class ProjectManagementService {
 
   getEditProject(projectId: number) {
     return this.http.get<ProjectEditDto>(this.baseUrl + 'edit/' + projectId);
+  }
+
+  getProjectStatus() {
+    return this.http.get<ProjectStatusDto[]>(this.baseUrl + 'projectStatus');
+  }
+
+  getMyPaginatedProject(projectParams: ProjectParams) {
+    let params = getPaginationheaders(
+      projectParams.pageNumber,
+      projectParams.pageSize
+    );
+
+    params = params.append('orderBy', projectParams.orderBy);
+    params = params.append('statusId', projectParams.statusId);
+    params = params.append('customerName', projectParams.customerName);
+    params = params.append('projectName', projectParams.projectName);
+    params = params.append('projectCode', projectParams.projectCode);
+    //params = params.append('dueDate', projectParams.dueDate);
+    params = params.append('orderDirection', projectParams.orderDirection);
+    return getPaginatedResult<ProjectMembersTimesheetDto[]>(
+      this.baseUrl +'myProjects',
+      params,
+      this.http
+    ).pipe(
+      map((response) => {
+        return response;
+      })
+    );
+  }
+
+  postTimesheet(newTaskTimesheetDto : TaskLogsDto[]){
+    return this.http.post(this.baseUrl + 'timesheet', newTaskTimesheetDto);
   }
 }

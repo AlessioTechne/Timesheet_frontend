@@ -1,37 +1,27 @@
 <div>
     <div class="row">
-        <div class="col-xxl-8" *ngIf="project">
+        <div class="col-xxl-8" *ngIf="project && task">
             <mat-card class="trinta-card products-list-card mb-25 bg-white border-none d-block">
                 <mat-card-header>
                     <mat-card-title>
-                        <h5 (click)="onTitleClick()" style="cursor: pointer">{{project.projectCode}} -
+                        <h5 (click)="onTitleClick()" class="title" style="cursor: pointer">{{project.projectCode}} -
                             {{project.projectName}}</h5>
-                        <h3>{{task.taskNumber}} - {{task.taskName}}</h3>
+                        <h3 style="color: blue;">{{task.taskNumber}} - {{task.taskName}}</h3>
                         <h6>{{task.notes}}</h6>
                     </mat-card-title>
 
                     <mat-card-subtitle>
                         <button mat-mini-fab color="primary" style="display: right; margin-right:20px; "
-                            [routerLink]="['/home/project-management/taskEdit', projectId, taskId]">
+                            [routerLink]="['/home/project-management/taskEdit', projectId, project.projectName, taskId]">
                             <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-mini-fab color="primary" style="display: right; margin-right:20px; "
+                            (click)="closeTask()" *ngIf="!task.actualEndDate">
+                            <mat-icon>lock</mat-icon>
                         </button>
                     </mat-card-subtitle>
                 </mat-card-header>
             </mat-card>
-        </div>
-        <div class="col-xxl-2">
-            <mat-card class="trinta-card mb-25 bg-white border-none d-block">
-
-            </mat-card>
-        </div>
-        <div class="col-xxl-2">
-            <mat-card class="trinta-card mb-25 bg-white border-none d-block">
-
-            </mat-card>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xxxl-8">
             <div class="row">
                 <div class="col-lg-3 col-xl-4">
                     <app-task-info *ngIf="task" [task]="task"></app-task-info>
@@ -43,12 +33,67 @@
                     <app-task-invoices *ngIf="task" [task]="task"></app-task-invoices>
                 </div>
             </div>
+            <div class="col-xxxl-12">
+                <app-task-logs *ngIf="task" [taskId]="taskId" [taskName]="task.taskName" [hasLogsAsSubtasks]="task.hasLogsAsSubtasks"></app-task-logs>
+            </div>
         </div>
+        <div class="col-xxxl-4" *ngIf="taskOverview">
+            <div class="row">
+                <div class="col-xxl-6">
+                    <mat-card class="trinta-card pm-stat-card mb-25 bg-white border-none d-block text-center">
+                        <mat-card-content>
+                            <span class="d-block text-gray">
+                                GG Stimati
+                            </span>
+                            <h5>
+                                {{taskOverview.estimatedEffortInDays.toFixed(1)}}
+                            </h5>
 
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+                <div class="col-xxl-6">
+                    <mat-card class="trinta-card pm-stat-card mb-25 bg-white border-none d-block text-center">
+                        <mat-card-content>
+                            <span class="d-block text-gray">
+                                GG Lavorati
+                            </span>
+                            <h5>
+                                {{taskOverview.taskLoggedDaysByBudget.toFixed(1)}}
+                            </h5>
 
-        <div class="col-xxl-4">
-            <app-task-employees *ngIf="taskId" [taskId]="taskId" [projectId]="projectId"></app-task-employees>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+                <div class="col-xxl-6">
+                    <mat-card class="trinta-card pm-stat-card mb-25 bg-white border-none d-block text-center">
+                        <mat-card-content>
+                            <span class="d-block text-gray">
+                                Delta
+                            </span>
+                            <h5
+                                [ngClass]="{'green': taskOverview.estimatedEffortInDays - taskOverview.taskLoggedDaysByBudget >= 0 && taskOverview.hasBudget, 'red': taskOverview.estimatedEffortInDays - taskOverview.taskLoggedDaysByBudget <= 0 && taskOverview.hasBudget}">
+                                {{(taskOverview.estimatedEffortInDays -
+                                taskOverview.taskLoggedDaysByBudget).toFixed(1)}}
+                            </h5>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+                <div class="col-xxl-6">
+                    <mat-card class="trinta-card pm-stat-card mb-25 bg-white border-none d-block text-center">
+                        <mat-card-content>
+                            <span class="d-block text-gray">
+                                GG Extra P
+                            </span>
+                            <h5>
+                                {{taskOverview.taskLoggedDaysOutOfBudget}}
+                            </h5>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+                <app-task-employees *ngIf="taskId" [taskId]="taskId" [projectId]="projectId"></app-task-employees>
 
+            </div>
         </div>
     </div>
 </div>

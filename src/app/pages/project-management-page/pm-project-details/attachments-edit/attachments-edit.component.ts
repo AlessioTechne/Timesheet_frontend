@@ -26,7 +26,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-attachments-edit',
@@ -61,25 +60,27 @@ export class AttachmentsEditComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<DialogMembersComponent>,
     private fb: FormBuilder
-  ) {
-    //if (name) this.name = name;
-  }
+  ) {}
 
   ngOnInit(): void {
     this.form = this.fb.group({
       attachName: ['', [Validators.required]],
+      attachDescription: ['', [Validators.required]],
       fileUpload: [null, [Validators.required]],
     });
 
-    /*.form.patchValue({
-      attachName: this.name,
-    });*/
+    this.form.get('fileUpload')?.valueChanges.subscribe((value) => {
+      this.form.patchValue({
+        attachName: value[0].name.replace(/\.[^/.]+$/, ''),
+      });
+    });
   }
 
   onSave() {
     const file = this.form.get('fileUpload')?.value[0];
     const attachName = this.form.get('attachName')?.value;
-    this.dialogRef.close({ data: [attachName, file] });
+    const attachDescription = this.form.get('attachDescription')?.value;
+    this.dialogRef.close({ data: [attachName, attachDescription, file] });
   }
   onClose() {
     this.dialogRef.close();

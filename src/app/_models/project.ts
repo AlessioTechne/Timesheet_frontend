@@ -59,7 +59,7 @@ export interface ProjectNewDto {
   businessUnitId: number;
   estimatedEffortInDays: number | null;
   approved: boolean;
-  notes: string; 
+  notes: string;
 }
 
 export class ProjectParams extends PaginationParams {
@@ -80,4 +80,55 @@ export interface ProjectStatsOrderDto {
   salesOrderAmount: number | null;
   invoiceNumber: string;
   invoiceDate: Date | null;
+}
+
+export interface ProjectStatusDto {
+  statusId: string;
+  statusName: string;
+}
+
+export interface ProjectMembersTimesheetDto {
+  projectId: number;
+  projectName: string;
+  projectCode: string;
+  projectLeaderId: number;
+  customerReference: string;
+  dueDate: Date | null;
+  estimatedEffortInDays: number | null;
+  notes: string;
+}
+
+export interface TaskTimesheetDto {
+  taskId: number;
+  hasLogsAsSubtasks: boolean;
+  taskName: string;
+  totalWorkHours: number | null;
+  estimatedEffortInDays: number | null;
+}
+
+export interface TaskLogsDto {
+  taskId: number;
+  taskName: string;
+  taskLogId: number;
+  taskLogName: string;
+  taskLogNote: string;
+  taskLogDate: Date;
+  actualWorkInHours: number;
+}
+
+export interface TaskLogAddDto {
+  taskId: number;
+  taskLogName: string;
+  taskLogDate: string;
+  taskLogNote: string;
+  actualWorkInHours: number;
+  employeeId: number;
+}
+export interface TaskLogsEditDto {
+  taskId: number;
+  taskLogId: number;
+  taskLogName: string;
+  taskLogDate: string;
+  taskLogNote: string;
+  actualWorkInHours: number;
 }

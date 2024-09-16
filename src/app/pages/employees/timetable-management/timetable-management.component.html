@@ -10,14 +10,16 @@
         </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-        <form [formGroup]="timeTableForm" class="form-container">
+        <form [formGroup]="timeTableForm" >
             <div class="row">
                 <ng-container>
-                    <td mat-cell>
+                    <label class="label d-block fw-medium mb-10">
                         Lunedì
-                    </td>
+                    </label>
+
                 </ng-container>
                 <div class="col-sm-4">
+                    
                     <mat-form-field>
                         <i-feather name="user"></i-feather>
                         <mat-label>Ore Minime</mat-label>
@@ -37,9 +39,9 @@
             </div>
             <div class="row">
                 <ng-container>
-                    <td mat-cell>
+                    <label class="label d-block fw-medium mb-10">
                         Martedì
-                    </td>
+                    </label>
                 </ng-container>
                 <div class="col-sm-4">
                     <mat-form-field>
@@ -56,14 +58,13 @@
                         <input matInput formControlName='maxHours2' type="number">
                     </mat-form-field>
                     <app-text-input [formControl]="$any(timeTableForm.controls['maxHours2'])" [label]="'Ora massima'"></app-text-input>
-
                 </div>
             </div>
             <div class="row">
                 <ng-container>
-                    <td mat-cell>
+                    <label class="label d-block fw-medium mb-10">
                         Mercoledì
-                    </td>
+                    </label>
                 </ng-container>
                 <div class="col-sm-4">
                     <mat-form-field>
@@ -72,7 +73,6 @@
                         <input matInput formControlName='minHours3' type="number">
                     </mat-form-field>
                     <app-text-input [formControl]="$any(timeTableForm.controls['minHours3'])" [label]="'Ora minima'"></app-text-input>
-
                 </div>
                 <div class="col-sm-4">
                     <mat-form-field>
@@ -80,14 +80,13 @@
                         <input matInput formControlName='maxHours3' type="number">
                     </mat-form-field>
                     <app-text-input [formControl]="$any(timeTableForm.controls['maxHours3'])" [label]="'Ora massima'"></app-text-input>
-
                 </div>
             </div>
             <div class="row">
                 <ng-container>
-                    <td mat-cell>
+                    <label class="label d-block fw-medium mb-10">
                         Giovedì
-                    </td>
+                    </label>
                 </ng-container>
                 <div class="col-sm-4">
                     <mat-form-field>
@@ -96,7 +95,6 @@
                         <input matInput formControlName='minHours4' type="number">
                     </mat-form-field>
                     <app-text-input [formControl]="$any(timeTableForm.controls['minHours4'])" [label]="'Ora minima'"></app-text-input>
-
                 </div>
                 <div class="col-sm-4">
                     <mat-form-field>
@@ -104,14 +102,13 @@
                         <input matInput formControlName='maxHours4' type="number">
                     </mat-form-field>
                     <app-text-input [formControl]="$any(timeTableForm.controls['maxHours4'])" [label]="'Ora massima'"></app-text-input>
-
                 </div>
             </div>
             <div class="row">
                 <ng-container>
-                    <td mat-cell>
+                    <label class="label d-block fw-medium mb-10">
                         Venerdì
-                    </td>
+                    </label>
                 </ng-container>
                 <div class="col-sm-4">
                     <mat-form-field>
@@ -120,7 +117,6 @@
                         <input matInput formControlName='minHours5' type="number">
                     </mat-form-field>
                     <app-text-input [formControl]="$any(timeTableForm.controls['minHours5'])" [label]="'Ora minima'"></app-text-input>
-
                 </div>
                 <div class="col-sm-4">
                     <mat-form-field>
@@ -128,14 +124,13 @@
                         <input matInput formControlName='maxHours5' type="number">
                     </mat-form-field>
                     <app-text-input [formControl]="$any(timeTableForm.controls['maxHours5'])" [label]="'Ora massima'"></app-text-input>
-
                 </div>
             </div>
             <div class="row">
                 <ng-container>
-                    <td mat-cell>
+                    <label class="label d-block fw-medium mb-10">
                         Sabato
-                    </td>
+                    </label>
                 </ng-container>
                 <div class="col-sm-4">
                     <mat-form-field>
@@ -144,7 +139,6 @@
                         <input matInput formControlName='minHours6' type="number">
                     </mat-form-field>
                     <app-text-input [formControl]="$any(timeTableForm.controls['minHours6'])" [label]="'Ora minima'"></app-text-input>
-
                 </div>
                 <div class="col-sm-4">
                     <mat-form-field>
@@ -152,14 +146,13 @@
                         <input matInput formControlName='maxHours6' type="number">
                     </mat-form-field>
                     <app-text-input [formControl]="$any(timeTableForm.controls['maxHours6'])" [label]="'Ora massima'"></app-text-input>
-
                 </div>
             </div>
             <div class="row">
                 <ng-container>
-                    <td mat-cell>
+                    <label class="label d-block fw-medium mb-10">
                         Domenica
-                    </td>
+                    </label>
                 </ng-container>
                 <div class="col-sm-4">
                     <mat-form-field>
@@ -168,7 +161,6 @@
                         <input matInput formControlName='minHours7' type="number">
                     </mat-form-field>
                     <app-text-input [formControl]="$any(timeTableForm.controls['minHours7'])" [label]="'Ora minima'"></app-text-input>
-
                 </div>
                 <div class="col-sm-4">
                     <mat-form-field>
@@ -176,7 +168,6 @@
                         <input matInput formControlName='maxHours7' type="number">
                     </mat-form-field>
                     <app-text-input [formControl]="$any(timeTableForm.controls['maxHours7'])" [label]="'Ora massima'"></app-text-input>
-
                 </div>
             </div>
             <br>
@@ -184,7 +175,7 @@
                 <mat-icon>save</mat-icon> Salva
             </button>
             <button mat-fab extended color="warn" (click)="onCancel()">
-                <mat-icon>cancel</mat-icon> Annulla
+                <mat-icon>cancel</mat-icon> Chiudi
             </button>
         </form>
     </mat-card-content>

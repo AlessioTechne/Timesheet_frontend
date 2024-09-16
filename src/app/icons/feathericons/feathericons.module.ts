@@ -1,7 +1,8 @@
-import { NgModule } from '@angular/core';
+import { Activity, AlertCircle, AlertTriangle, AlignLeft, BarChart2, Bell, BookOpen, Briefcase, Calendar, Camera, Check, CheckCircle, Clock, Code, Codepen, Coffee, Command, Copy, Crosshair, Database, DollarSign, Dribbble, Edit, Edit3, Facebook, File, FileMinus, FileText, Flag, Folder, Github, Globe, Headphones, Heart, Home, Info, Key, Layers, Link, Linkedin, List, Loader, Lock, Mail, Map, MapPin, Meh, MessageSquare, Minimize, Moon, MoreVertical, Octagon, Percent, Phone, PieChart, PlayCircle, Plus, Search, Send, Settings, Share2, ShoppingBag, ShoppingCart, Sliders, Smile, Star, Table, Tag, ThumbsUp, Trash, Trash2, TrendingDown, TrendingUp, Twitch, Twitter, User, UserCheck, UserPlus, Users, X, Youtube } from 'angular-feather/icons';
+
 import { CommonModule } from '@angular/common';
 import { FeatherModule } from 'angular-feather';
-import { Camera, Heart, Github, AlignLeft, Sliders, BarChart2, Edit3, ShoppingCart, Search, Moon, User, AlertCircle, Calendar, Bell, PieChart, Clock, Mail, Home, Phone, BookOpen, MapPin, Loader, TrendingUp, Map, ShoppingBag, Tag, Trash2, Minimize, DollarSign, CheckCircle, Percent, Database, Linkedin, UserCheck, Coffee, Flag, Globe, TrendingDown, Headphones, PlayCircle, Star, Info, MoreVertical, Users, List, Dribbble, Briefcase, Layers, Youtube, Check, Key, Share2, Command, Twitch, FileText, Copy, X, Code, Octagon, Codepen, Facebook, Twitter, UserPlus, Settings, Link, Meh, Lock, Smile, Activity, MessageSquare, Folder, File, Send, Trash, AlertTriangle, Crosshair, Plus, Table, FileMinus, Edit, ThumbsUp } from 'angular-feather/icons';
+import { NgModule } from '@angular/core';
 
 // Select some icons (use an object, not an array)
 const icons = {

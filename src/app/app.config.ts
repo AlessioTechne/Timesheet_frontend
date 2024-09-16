@@ -1,3 +1,4 @@
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 
 import { ApplicationConfig } from '@angular/core';
@@ -13,5 +14,6 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(),
     provideAnimationsAsync(),
     provideHttpClient(withInterceptors([tokenInterceptor])),
+    { provide: LocationStrategy, useClass: HashLocationStrategy }
   ],
 };

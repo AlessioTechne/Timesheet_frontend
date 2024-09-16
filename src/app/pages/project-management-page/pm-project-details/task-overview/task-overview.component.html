@@ -8,14 +8,14 @@
         <mat-card-subtitle>
             <button matTooltip='Crea Nuovo Progetto' mat-mini-fab color="primary"
                 style="display: right; margin-right:20px; "
-                [routerLink]="['/home/project-management/taskEdit', projectId]">
+                [routerLink]="['/home/project-management/taskEdit', projectId, projectTitle]">
                 <mat-icon>add</mat-icon>
             </button>
         </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
         <form class="search-box position-relative" [formGroup]="filtersForm">
-            <div class="flex-container">
+            <div class="flex-container ">
                 <mat-form-field class="search">
                     <i-feather name="search"></i-feather>
                     <mat-label>Nome Task</mat-label>
@@ -51,7 +51,7 @@
                         <td mat-cell *matCellDef="let element">
                             <div class="task-name position-relative">
                                 <h6 class="mt-0 mb-0">
-                                    <a [routerLink]="['/home/project-management/taskDetail', element.taskId]">
+                                    <a [routerLink]="['./taskDetail', element.taskId]">
                                         {{element.taskNumber}}
                                     </a>
                                 </h6>
@@ -66,13 +66,11 @@
                             Task
                         </th>
                         <td mat-cell *matCellDef="let element" class="pl-0">
-                            <div class="task-name position-relative">
-                                <h6 class="mt-0 mb-0" style="max-width: 200px; word-wrap: break-word;">
+                            <div class="task-name position-relative mt-0 mb-0 flex-wrap"  style="max-width: 350px;">
                                     <a
                                         [routerLink]="['/home/project-management/taskDetail', element.projectId, element.taskId]">
                                         {{element.taskName}}
                                     </a>
-                                </h6>
                             </div>
                         </td>
                     </ng-container>
@@ -92,7 +90,7 @@
                             GG Lavorati
                         </th>
                         <td mat-cell *matCellDef="let element" class="text-center">
-                            {{element.taskLoggedDaysByBudget}}
+                            {{element.taskLoggedDaysByBudget.toFixed(1)}}
                         </td>
                     </ng-container>
 
@@ -104,7 +102,7 @@
 
                         <td mat-cell *matCellDef="let element" class="text-center"
                             [ngClass]="{'no-budget': !element.hasBudget}">
-                            {{element.taskLoggedDaysOutOfBudge?.toFixed(1)}}
+                            {{element.taskLoggedDaysOutOfBudget?.toFixed(1)}}
                         </td>
                     </ng-container>
 
@@ -125,11 +123,8 @@
                             Inizio
                         </th>
                         <td mat-cell *matCellDef="let element">
-                            <ng-container *ngIf="element.actualStartDate !== '1900-01-01T00:00:00'">
+                            <ng-container>
                                 {{element.actualStartDate|date : 'dd/MM/yyyy'}}
-                            </ng-container>
-                            <ng-container *ngIf="element.actualStartDate === '1900-01-01T00:00:00'">
-                                --/--/----
                             </ng-container>
                         </td>
                     </ng-container>
@@ -140,11 +135,8 @@
                             Fine
                         </th>
                         <td mat-cell *matCellDef="let element">
-                            <ng-container *ngIf="element.actualEndDate !== '1900-01-01T00:00:00'">
-                                {{element.actualEndDate|date : 'dd/MM/yyyy'}}
-                            </ng-container>
-                            <ng-container *ngIf="element.actualEndDate === '1900-01-01T00:00:00'">
-                                --/--/----
+                            <ng-container >
+                                {{ element.actualEndDate ? (element.actualEndDate|date : 'dd/MM/yyyy') : '--/--/----'}}
                             </ng-container>
                         </td>
                     </ng-container>
@@ -152,11 +144,11 @@
                     <!-- Action Column -->
                     <ng-container matColumnDef="actions">
                         <th mat-header-cell *matHeaderCellDef class="text-end pr-0"></th>
-                        <td mat-cell *matCellDef="let element" class="text-end pr-0">
+                        <td mat-cell *matCellDef="let element" class="text-end pr-0" style="white-space: nowrap;">
                             <div class="action">
                                 <button mat-icon-button matTooltip="Primary" color="primary"
                                     aria-label="Modifica Cliente"
-                                    [routerLink]="['/home/project-management/taskEdit', projectId, element.taskId]">
+                                    [routerLink]="['/home/project-management/taskEdit', projectId, projectTitle, element.taskId]">
                                     <mat-icon>edit</mat-icon>
                                 </button>
                                 <button mat-icon-button color="primary" (click)="openDialog(element.taskId)">

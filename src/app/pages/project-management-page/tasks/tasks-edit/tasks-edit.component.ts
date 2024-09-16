@@ -1,5 +1,5 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -39,6 +39,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { TaskService } from '../../../../_services/task.service';
 import { TextInputComponent } from '../../../../_forms/text-input/text-input.component';
 import { NavigationService } from '../../../../_services/navigation.service';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-tasks-edit',
@@ -63,12 +64,14 @@ import { NavigationService } from '../../../../_services/navigation.service';
     MatDatepickerToggle,
     MatNativeDateModule,
     MatOptionModule,
+    MatCheckboxModule,
   ],
   providers: [DatePipe, { provide: MAT_DATE_LOCALE, useValue: 'it-IT' }],
   templateUrl: './tasks-edit.component.html',
   styleUrl: './tasks-edit.component.scss',
 })
 export class TasksEditComponent implements OnInit {
+  projectTitle: string;
   taskForm: FormGroup;
   formSubmitted: boolean = false;
   pageTitle: string;
@@ -96,6 +99,9 @@ export class TasksEditComponent implements OnInit {
       if (params.has('idProject')) {
         this.projectId = +params.get('idProject')!;
       }
+      if (params.has('projectTitle')) {
+        this.projectTitle = params.get('projectTitle')!;
+      }
       if (params.has('idTask')) {
         this.taskId = +params.get('idTask')!;
       }
@@ -103,16 +109,25 @@ export class TasksEditComponent implements OnInit {
     this.initializeForm();
     this.loadWPTypes();
     this.loadTask();
+    this.taskForm.valueChanges.subscribe((value) => {
+      if (value['estimatedEffortInDays']) {
+        this.taskForm.controls['hasBudget'].setValue(true, { emitEvent: false });
+      }
+      else {
+        this.taskForm.controls['hasBudget'].setValue(false, { emitEvent: false });
+      }
+    });
   }
 
   initializeForm() {
     this.taskForm = this.fb.group({
       taskNumber: [0, [Validators.required]],
       taskName: ['', [Validators.required]],
-      estimatedEffortInDays: [''],
+      estimatedEffortInDays: [0, [Validators.min(0)]],
       actualStartDate: [new Date(), [Validators.required]],
       actualEndDate: [new Date()],
       costCenter: [''],
+      hasBudget: [{ value: false, disabled: true }],
       wpTypeId: [null, [Validators.required]],
     });
   }
@@ -131,7 +146,7 @@ export class TasksEditComponent implements OnInit {
             costCenter: task.costCenter,
             wpTypeId: this.wptype.find((x) => x.wpTypeId == task.wpTypeId),
           });
-          this.pageTitle = 'Modifica Task';
+          this.pageTitle = 'Modifica Task: ' + task.taskName;
         },
       });
     } else {
@@ -204,7 +219,16 @@ export class TasksEditComponent implements OnInit {
   }
 
   onDelete() {
-    throw new Error('Method not implemented.');
+    this.taskService.deleteTask(this.taskId).subscribe({
+      complete: () => {
+        this.router.navigate([
+          '/home/project-management/detail/' + this.projectId,
+        ]);
+        this._snackBar.open('Task eliminato con successo', undefined, {
+          duration: 3 * 1000,
+        });
+      },
+    });
   }
 
   onCancel() {

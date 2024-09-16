@@ -50,7 +50,7 @@
                         border: none;
                         overflow: unset;
                         text-align: start;
-                        white-space: nowrap;
+                        white-space: wrap;
                         line-height: initial;
                         padding: 0 15px 15px;
                         letter-spacing: normal;
@@ -76,26 +76,13 @@
                     overflow: hidden;
                     text-align: start;
                     padding: 24px 15px;
-                    white-space: nowrap;
+                    white-space: wrap;
                     line-height: initial;
                     letter-spacing: 0.14px;
                     background: transparent;
                     border-bottom: 1px solid #edeff5;
 
-                    .task-name {
-                        padding-left: 28px;
-
-                        .mat-mdc-checkbox {
-                            left: 0;
-                            top: 50%;
-                            margin-top: -1.3px;
-                            position: absolute;
-                            transform: translateY(-50%);
-                        }
-                        h6 {
-                            font-size: 15px;
-                        }
-                    }
+                    
                     .trinta-badge {
                         font-size: 12px;
                         border-radius: 2px;

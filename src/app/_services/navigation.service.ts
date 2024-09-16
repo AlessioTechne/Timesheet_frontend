@@ -19,7 +19,14 @@ export class NavigationService {
     });
   }
 
-  getPreviousUrl(): string | undefined {
+  getPreviousUrl(): string {
+    if (this.previousUrl === undefined || this.previousUrl === '/') {
+      return this.getHomeUrl();
+    }
     return this.previousUrl;
+  }
+
+  getHomeUrl(): string {
+    return '/home';
   }
 }

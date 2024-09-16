@@ -1,10 +1,10 @@
 import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
-import { NavigationExtras, Router } from '@angular/router';
 import { catchError, delay, finalize, identity } from 'rxjs';
 
 import { AuthService } from '../_services/auth.service';
 import { LoadingService } from '../_services/loading.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { environment } from '../environments/environments';
 import { inject } from '@angular/core';
 

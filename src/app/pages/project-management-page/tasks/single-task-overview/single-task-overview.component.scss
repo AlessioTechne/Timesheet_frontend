@@ -1,8 +1,14 @@
-h5 {
+.title {
     color: black; // Imposta il colore predefinito del titolo
     transition: color 0.3s; // Aggiungi una transizione al cambio di colore
 
     &:hover {
         color: var(--primaryColor); // Imposta il colore del titolo durante l'hover
     }
+}
+.green {
+    color: green;
+}
+.red {
+    color: red;
 }

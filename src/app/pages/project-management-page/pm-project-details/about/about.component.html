@@ -7,7 +7,8 @@
         </mat-card-title>
         <mat-card-subtitle>
             <div class="action">
-                <button mat-mini-fab color="primary" style="display: right; margin-right:20px; " [routerLink]="['/home/project-management/edit', project.projectId  ]">
+                <button mat-mini-fab color="primary" style="display: right; margin-right:20px; "
+                    [routerLink]="['/home/project-management/edit', project.projectId  ]">
                     <mat-icon>edit</mat-icon>
                 </button>
             </div>
@@ -26,45 +27,47 @@
                 <span class="d-block text-body fw-medium">
                     Cliente
                 </span>
-                <h6 class="mb-0 fw-medium">
-                    {{project.customerName}}
-                </h6>
+                <br>
+                {{project.customerName}}
             </li>
             <li class="d-inline-block">
                 <span class="d-block text-body fw-medium">
                     Riferimento
                 </span>
-                <h6 class="mb-0 fw-medium">
-                    {{project.customerReference? project.customerReference : 'n/a'}}
-                </h6>
+                <br>
+                {{project.customerReference? project.customerReference : 'n/a'}}
+
             </li>
             <li class="d-inline-block">
                 <span class="d-block text-body fw-medium">
                     Data di Creazione
                 </span>
-                <h6 class="mb-0 fw-medium">
-                    @if (project.projectCreatedAt) { {{project.projectCreatedAt | date:'dd MMM yyyy'}} }
-                    @else {--/--/----}
+                {{project.projectCreatedAt?(project.projectCreatedAt | date:'dd MMM yyyy'):'--/--/----'}}
+            </li>
 
-                </h6>
-            </li>
-           
-            
             <li class="d-inline-block">
                 <span class="d-block text-body fw-medium">
-                    gg/u stima preliminare
+                    GG Stima Preliminare
                 </span>
-                <h6 class="mb-0 fw-medium">
-                    {{project.estimatedEffortInDays ? project.estimatedEffortInDays : 'n/a'}}
-                </h6>
+                {{project.estimatedEffortInDays ? project.estimatedEffortInDays : 'n/a'}}
+
             </li>
             <li class="d-inline-block">
                 <span class="d-block text-body fw-medium">
-                    gg/u offerti(task)
+                    GG/u Stimati(task)
                 </span>
-                <h6 class="mb-0 fw-medium">
-                    {{project.totEstimatedEffortInDays?.toFixed(1)}}
-                </h6>
+
+                {{project.totEstimatedEffortInDays? project.totEstimatedEffortInDays.toFixed(1): '--'}}
+
+            </li>
+            <li class="d-inline-block">
+                <span class="d-block text-body fw-medium">
+                    Project Leader
+                </span>
+                <br>
+
+                {{project.projectLeader}}
+
             </li>
         </ul>
     </mat-card-content>

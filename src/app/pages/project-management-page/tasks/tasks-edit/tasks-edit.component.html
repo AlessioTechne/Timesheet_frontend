@@ -4,6 +4,9 @@
             <h5 class="mt-0 mb-0">
                 {{pageTitle}}
             </h5>
+            <h6>
+                Progetto: {{projectTitle}}
+            </h6>
         </mat-card-title>
         <mat-card-subtitle>
             <button matTooltip='Elimina utente' mat-mini-fab color="warn" style="display: inline; margin-right:20px; "
@@ -13,39 +16,40 @@
         </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-        <form [formGroup]="taskForm" class="form-container">
+        <form [formGroup]="taskForm" >
             <div class="row">
                 <div class="col-sm-6">
+                    <label class="label d-block fw-medium mb-10">
+                        Numero Task
+                    </label>
                     <mat-form-field>
                         <i-feather name="icon"></i-feather>
-                        <mat-label>Numero Task</mat-label>
+                        <mat-label>Inserire Numero Task</mat-label>
                         <input matInput type="number" [formControl]="$any(taskForm.controls['taskNumber'])">
                     </mat-form-field>
                     <app-text-input [formControl]="$any(taskForm.controls['taskNumber'])"
                         [label]="'Task Number'"></app-text-input>
                 </div>
                 <div class="col-sm-6">
+                    <label class="label d-block fw-medium mb-10">
+                        Nome Task
+                    </label>
                     <mat-form-field>
                         <i-feather name="icon"></i-feather>
-                        <mat-label>Nome Task</mat-label>
+                        <mat-label>Inserire Nome Task</mat-label>
                         <input matInput [formControl]="$any(taskForm.controls['taskName'])">
                     </mat-form-field>
                     <app-text-input [formControl]="$any(taskForm.controls['taskName'])"
                         [label]="'Task Name'"></app-text-input>
                 </div>
+
                 <div class="col-sm-6">
-                    <mat-form-field>
-                        <i-feather name="user"></i-feather>
-                        <mat-label>estimatedEffortInDays </mat-label>
-                        <input matInput type="number" [formControl]="$any(taskForm.controls['estimatedEffortInDays'])">
-                    </mat-form-field>
-                    <app-text-input [formControl]="$any(taskForm.controls['estimatedEffortInDays'])"
-                        [label]="'Giorni stimati'" />
-                </div>
-                <div class="col-sm-6">
+                    <label class="label d-block fw-medium mb-10">
+                        Data Inizio
+                    </label>
                     <mat-form-field>
                         <i-feather name="calendar"></i-feather>
-                        <mat-label>actual start date</mat-label>
+                        <mat-label>Inserire Data Inizio</mat-label>
                         <input matInput [formControl]="$any(taskForm.controls['actualStartDate'])"
                             [matDatepicker]="actualStartDate">
                         <mat-datepicker-toggle matIconSuffix [for]="actualStartDate"></mat-datepicker-toggle>
@@ -53,9 +57,12 @@
                     </mat-form-field>
                 </div>
                 <div class="col-sm-6">
+                    <label class="label d-block fw-medium mb-10">
+                        Data Fine
+                    </label>
                     <mat-form-field>
                         <i-feather name="calendar"></i-feather>
-                        <mat-label>actual end date</mat-label>
+                        <mat-label>Inserire Data Fine</mat-label>
                         <input matInput [formControl]="$any(taskForm.controls['actualEndDate'])"
                             [matDatepicker]="actualEndDate">
                         <mat-datepicker-toggle matIconSuffix [for]="actualEndDate"></mat-datepicker-toggle>
@@ -64,24 +71,43 @@
                 </div>
 
                 <div class="col-sm-6">
+                    <label class="label d-block fw-medium mb-10">
+                        Centro di Costo
+                    </label>
                     <mat-form-field>
                         <i-feather name="user"></i-feather>
-                        <mat-label>Centro di Costo</mat-label>
+                        <mat-label>Inserire Centro di Costo</mat-label>
                         <input matInput [formControl]="$any(taskForm.controls['costCenter'])">
                     </mat-form-field>
                     <app-text-input [formControl]="$any(taskForm.controls['costCenter'])" [label]="'Centro di costo'" />
                 </div>
 
                 <div class="col-sm-6">
+                    <label class="label d-block fw-medium mb-10">
+                        Tipo Task
+                    </label>
                     <mat-form-field>
                         <i-feather name="user"></i-feather>
-                        <mat-label>Centro di Costo</mat-label>
+                        <mat-label>Inserire Tipo Task</mat-label>
                         <mat-select [formControl]="$any(taskForm.controls['wpTypeId'])">
-                            <mat-option *ngFor="let option of wptype"
-                                [value]="option.wpTypeId">{{option.wpTypeId }} - {{option.wpTypeName}}</mat-option>
+                            <mat-option *ngFor="let option of wptype" [value]="option.wpTypeId">{{option.wpTypeId }} -
+                                {{option.wpTypeName}}</mat-option>
                         </mat-select>
                     </mat-form-field>
                     <app-text-input [formControl]="$any(taskForm.controls['wpTypeId'])" [label]="'wptypeid'" />
+                </div>
+                <div class="col-sm-6">  
+                    <label class="label d-block fw-medium mb-10">
+                        GG Stimati
+                        <mat-checkbox color="primary" [disabled]="true" [formControl]="$any(taskForm.controls['hasBudget'])">Task con preventivo</mat-checkbox>
+                    </label>
+                    <mat-form-field>
+                        <i-feather name="user"></i-feather>
+                        <mat-label>Inserire Giorni Stimati</mat-label>
+                        <input matInput type="number" [formControl]="$any(taskForm.controls['estimatedEffortInDays'])">
+                    </mat-form-field>
+                    <app-text-input [formControl]="$any(taskForm.controls['estimatedEffortInDays'])"
+                        [label]="'Giorni stimati'" />
                 </div>
 
             </div>
@@ -89,7 +115,7 @@
                 <mat-icon>save</mat-icon> Salva
             </button>
             <button mat-fab extended color="warn" (click)="onCancel()">
-                <mat-icon>cancel</mat-icon> Annulla
+                <mat-icon>cancel</mat-icon> Chiudi
             </button>
             <div class="label-group" *ngIf="taskDto">
 
